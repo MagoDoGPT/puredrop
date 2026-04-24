@@ -1,0 +1,395 @@
+.signature-section {
+  position: relative;
+  overflow: hidden;
+  /* Push down the radial gradients and extend solid white so the seam is mathematically identical to the hero's end */
+  background: 
+    radial-gradient(ellipse at 20% 25%, rgba(0, 165, 255, 0.08) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 100%, rgba(21, 101, 192, 0.05) 0%, transparent 55%),
+    linear-gradient(180deg, #ffffff 0%, #ffffff 15%, #f4fafd 55%, #eef7fc 100%);
+  color: var(--color-navy);
+  /* Standard top padding, extra bottom padding to account for 100px wave transition */
+  padding: clamp(120px, 15vh, 160px) 0 clamp(220px, 25vh, 260px);
+  margin-top: -2px; /* overlap subpixel rendering gaps */
+  z-index: 10;
+}
+
+.sig-orb {
+  position: absolute;
+  filter: blur(100px);
+  pointer-events: none;
+  z-index: 0;
+  animation: liquid-morph 15s ease-in-out infinite;
+}
+
+@keyframes liquid-morph {
+  0% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+  34% { border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%; }
+  67% { border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%; }
+  100% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+}
+
+.sig-orb--1 {
+  width: 480px;
+  height: 480px;
+  background: rgba(0, 165, 255, 0.15);
+  top: -120px;
+  right: -80px;
+}
+
+.sig-orb--2 {
+  width: 360px;
+  height: 360px;
+  background: rgba(79, 209, 197, 0.15);
+  bottom: -100px;
+  left: -60px;
+}
+
+.sig-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--sp-6);
+}
+
+/* ── Header ─────────────────────────────────────────────────── */
+.sig-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto var(--sp-16);
+}
+
+.sig-title {
+  font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  color: var(--color-navy);
+  margin-bottom: var(--sp-6);
+}
+
+.signature-section .sig-pillar__title {
+  color: var(--color-navy);
+}
+
+.sig-title__accent {
+  background: linear-gradient(120deg, #00A5FF 0%, #1565C0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-style: italic;
+  font-weight: 500;
+}
+
+.sig-tagline {
+  font-size: var(--text-lg);
+  line-height: 1.7;
+  color: rgba(11, 45, 94, 0.7);
+}
+
+.sig-tagline em {
+  color: #1565C0;
+  font-style: normal;
+  font-weight: 600;
+}
+
+/* ── Immersive Stage ────────────────────────────────────────── */
+.sig-stage--immersive {
+  display: grid;
+  grid-template-columns: 1fr 380px 1fr;
+  gap: var(--sp-8);
+  align-items: center;
+  margin: var(--sp-16) 0 var(--sp-20);
+  perspective: 1000px;
+}
+
+.sig-pillars--left,
+.sig-pillars--right {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-12);
+  list-style: none;
+  margin: 0; padding: 0;
+}
+
+.sig-pillars--left {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.sig-pillars--right {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.sig-pillar--floating {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-5);
+  width: 100%;
+  max-width: 340px;
+}
+
+.sig-pillars--left .sig-pillar--floating {
+  flex-direction: row-reverse;
+}
+
+.sig-pillar__icon {
+  width: 72px;
+  height: 72px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 10px 25px rgba(0, 165, 255, 0.08), inset 0 0 0 1px rgba(255,255,255,0.6);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.sig-pillar__icon::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(0, 165, 255, 0.15);
+  transform: scale(0);
+  transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.sig-pillar--floating:hover .sig-pillar__icon {
+  transform: scale(1.1);
+  box-shadow: 0 15px 35px rgba(0, 165, 255, 0.15), inset 0 0 0 1px rgba(255,255,255,1);
+}
+
+.sig-pillar--floating:hover .sig-pillar__icon::after {
+  transform: scale(2);
+}
+
+.sig-pillar__icon svg {
+  width: 32px;
+  height: 32px;
+  z-index: 1;
+}
+
+.sig-pillar__title {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  margin-bottom: var(--sp-2);
+  letter-spacing: -0.01em;
+  color: var(--color-navy);
+}
+
+.sig-pillar__copy {
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: rgba(11, 45, 94, 0.65);
+  margin: 0;
+}
+
+/* Hero Liquid Product */
+.sig-product--hero {
+  position: relative;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(244, 250, 253, 0.4) 100%);
+  box-shadow: inset 0 0 40px rgba(255, 255, 255, 1), 0 20px 60px rgba(0, 165, 255, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  animation: liquid-morph 10s ease-in-out infinite;
+  z-index: 5;
+}
+
+.sig-product__icon {
+  width: 65%;
+  height: auto;
+  z-index: 2;
+  filter: drop-shadow(0 15px 30px rgba(0, 165, 255, 0.4));
+  stroke-width: 1.2 !important;
+}
+
+/* Remove sonar ripple effect */
+
+/* ── CTA row ────────────────────────────────────────────────── */
+.sig-cta-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--sp-4);
+  flex-wrap: wrap;
+}
+
+.sig-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-3);
+  padding: var(--sp-4) var(--sp-10);
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-size: var(--text-base);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sig-cta svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  z-index: 1;
+}
+
+/* Creative Liquid Button Effect */
+.sig-cta--primary {
+  position: relative;
+  background: linear-gradient(120deg, #00A5FF, #5BCEFA, #1565C0, #00A5FF);
+  background-size: 300% 100%;
+  color: #ffffff;
+  border: none;
+  z-index: 1;
+  box-shadow: 0 10px 25px rgba(0, 165, 255, 0.2);
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  animation: liquid-gradient 6s linear infinite;
+}
+
+@keyframes liquid-gradient {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+
+/* Ripple layers */
+.sig-cta--primary::before,
+.sig-cta--primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-full);
+  border: 2px solid #5BCEFA;
+  z-index: -1;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sig-cta--primary:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 35px rgba(0, 165, 255, 0.4);
+}
+
+.sig-cta--primary:hover::before {
+  animation: hydro-ripple-btn 2s cubic-bezier(0.19, 1, 0.22, 1) infinite;
+}
+
+.sig-cta--primary:hover::after {
+  animation: hydro-ripple-btn 2s cubic-bezier(0.19, 1, 0.22, 1) infinite;
+  animation-delay: 1s;
+}
+
+@keyframes hydro-ripple-btn {
+  0% { transform: scale(1); opacity: 0.8; border-width: 2px; }
+  100% { transform: scaleX(1.3) scaleY(1.6); opacity: 0; border-width: 0; }
+}
+
+.sig-cta--ghost {
+  position: relative;
+  border: none;
+  background: transparent;
+  color: var(--color-navy);
+  padding: var(--sp-4) var(--sp-2);
+}
+
+.sig-cta--ghost::after {
+  content: '';
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  width: 0;
+  height: 1px;
+  background: var(--color-navy);
+  transition: all 0.4s ease;
+}
+
+.sig-cta--ghost:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .sig-stage--immersive {
+    grid-template-columns: 1fr;
+    gap: var(--sp-12);
+  }
+
+  .sig-pillars--left,
+  .sig-pillars--right {
+    align-items: center;
+    text-align: center;
+  }
+
+  .sig-pillar--floating,
+  .sig-pillars--left .sig-pillar--floating,
+  .sig-pillars--right .sig-pillar--floating {
+    flex-direction: column;
+    max-width: 400px;
+  }
+
+  .sig-product--hero {
+    max-width: 320px;
+    margin: 0 auto;
+    order: -1; /* Product goes to top on mobile */
+  }
+}
+
+@media (max-width: 560px) {
+  .sig-cta-row {
+    flex-direction: column;
+    gap: var(--sp-6);
+  }
+  .sig-cta {
+    width: 100%;
+  }
+}
+
+/* ── Seamless Liquid Wave Transition ─────────────────────────── */
+.sig-water-transition {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  overflow: hidden;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.sig-water-transition svg {
+  width: 200%;
+  height: 100%;
+  display: block;
+}
+
+.sig-wave--back {
+  animation: sig-wave-flow 12s linear infinite;
+}
+
+.sig-wave--front {
+  animation: sig-wave-flow 8s linear infinite;
+}
+
+@keyframes sig-wave-flow {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}

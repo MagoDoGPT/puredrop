@@ -1,0 +1,313 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  color: var(--color-navy);
+  padding: var(--sp-6) 0;
+  background-color: transparent;
+  border-bottom: 1px solid transparent;
+}
+
+.header.scrolled,
+.header.solid {
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: var(--sp-3) 0;
+  border-bottom: 1px solid rgba(11, 45, 94, 0.06);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.02);
+}
+
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 var(--sp-6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.desktopNav {
+  display: flex;
+  gap: var(--sp-8);
+  flex: 1;
+  justify-content: center;
+}
+
+.navItem {
+  position: relative;
+  font-weight: 500;
+  font-size: var(--text-sm);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: var(--sp-2) 0;
+  cursor: pointer;
+}
+
+.navItem a {
+  padding: var(--sp-2) 0;
+}
+
+.logoContainer {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: flex-start;
+  min-width: 170px;
+}
+
+.logoSvg {
+  display: block;
+}
+
+.logoMark {
+  display: block;
+  width: 160px;
+  height: 48px;
+  -webkit-mask: url('/logo.png') no-repeat left center;
+  mask: url('/logo.png') no-repeat left center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  transition: background-color var(--transition-normal);
+}
+
+.logoMarkDark {
+  background-color: var(--color-navy);
+}
+
+.logoMarkLight {
+  background-color: var(--color-white);
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: var(--sp-5);
+  flex: 0 0 auto;
+  min-width: 170px;
+}
+
+.actionBtn {
+  color: inherit;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: var(--sp-1);
+}
+
+.cartBadge {
+  position: absolute;
+  top: -5px;
+  right: -8px;
+  background-color: var(--color-navy);
+  color: var(--color-white);
+  font-size: 10px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+
+/* Mega Menu Dropdowns */
+.megaMenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: var(--color-white);
+  color: var(--color-navy);
+  border-bottom: 1px solid var(--color-gray-200);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all var(--transition-normal);
+  padding: var(--sp-8) 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.megaMenu.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.megaContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--sp-6);
+}
+
+.megaGrid5 {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--sp-6);
+}
+
+.productCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  align-items: center;
+  text-align: center;
+  font-weight: 500;
+}
+
+.imgPlaceholder {
+  width: 100%;
+  aspect-ratio: 1;
+  background-color: #f5f8fa; /* Soft light gray/blue */
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-navy);
+  font-size: var(--text-sm);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid transparent;
+}
+
+.productCard:hover .imgPlaceholder {
+  transform: translateY(-5px);
+  background-color: #e6f7ff;
+  border-color: rgba(0, 165, 255, 0.2);
+  box-shadow: 0 10px 20px rgba(0, 165, 255, 0.08);
+  color: #00A5FF;
+}
+
+/* Flagship Product Highlight */
+.imgPlaceholderSignature {
+  background: linear-gradient(135deg, var(--color-navy) 0%, #155291 100%);
+  color: var(--color-white);
+  border: 1px solid rgba(0, 165, 255, 0.3);
+}
+
+.productCard:hover .imgPlaceholderSignature {
+  background: linear-gradient(135deg, #155291 0%, #00A5FF 100%);
+  color: var(--color-white);
+  border-color: #00A5FF;
+  box-shadow: 0 10px 25px rgba(0, 165, 255, 0.25);
+}
+
+.viewAllCard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  background-color: #f5f8fa;
+  color: var(--color-navy);
+  border-radius: var(--radius-md);
+  padding: var(--sp-6);
+  font-weight: 600;
+  text-align: left;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.viewAllCard:hover {
+  background-color: var(--color-navy);
+  color: var(--color-white);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(11, 45, 94, 0.15);
+}
+
+.megaGrid3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-8);
+}
+
+.infoCol h3 {
+  margin-bottom: var(--sp-2);
+  font-size: var(--text-lg);
+}
+
+.infoCol p {
+  color: var(--color-gray-400);
+  margin-bottom: var(--sp-4);
+  font-size: var(--text-sm);
+}
+
+.textLink {
+  font-weight: 600;
+  color: var(--color-blue);
+  font-size: var(--text-sm);
+}
+
+.textLink:hover {
+  text-decoration: underline;
+}
+
+/* Mobile Nav */
+.mobileToggle {
+  display: none;
+  color: inherit;
+  padding: var(--sp-1);
+}
+
+.mobileDrawer {
+  position: fixed;
+  top: 60px; /* Below header */
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 60px);
+  background-color: var(--color-white);
+  color: var(--color-navy);
+  transform: translateX(-100%);
+  transition: transform var(--transition-normal);
+  overflow-y: auto;
+  padding: var(--sp-6);
+}
+
+.mobileDrawer.open {
+  transform: translateX(0);
+}
+
+.mobileNav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.mobileLink {
+  font-size: var(--text-xl);
+  font-weight: 500;
+  padding: var(--sp-2) 0;
+}
+
+.mobileDivider {
+  height: 1px;
+  background-color: var(--color-gray-200);
+  margin: var(--sp-2) 0;
+}
+
+@media (max-width: 768px) {
+  .desktopNav, .hideMobile {
+    display: none;
+  }
+
+  .mobileToggle {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex: 0 0 auto;
+  }
+
+  .logoContainer {
+    flex: 1;
+    justify-content: flex-start;
+    min-width: 0;
+    margin-left: var(--sp-3);
+  }
+
+  .actions {
+    min-width: 0;
+    gap: var(--sp-4);
+  }
+}

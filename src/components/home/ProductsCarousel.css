@@ -1,0 +1,332 @@
+/* ── SECTION 3: SUPERIOR PRODUCTS CAROUSEL ─────────────────────────── */
+.products-section {
+    background: radial-gradient(150% 100% at 50% 10%, #ffffff 40%, #e6f4fc 100%);
+    overflow: hidden;
+    position: relative;
+    z-index: 10;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(40px, 6vh, 80px) 0;
+}
+
+/* Ambient fluid background behind the carousel */
+.products-ambient-blob {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60vw;
+    height: 60vw;
+    background: radial-gradient(circle, rgba(0, 165, 255, 0.08) 0%, rgba(0, 165, 255, 0) 70%);
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    filter: blur(60px);
+    pointer-events: none;
+    z-index: 1;
+    animation: ambient-drift 20s infinite alternate cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+@keyframes ambient-drift {
+    0%   { transform: translate(-60%, -40%) scale(1); }
+    100% { transform: translate(-40%, -60%) scale(1.1) rotate(15deg); }
+}
+
+.products-top-wave {
+    display: none;
+}
+
+/* Huge background typography for parallax */
+.products-bg-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20vw; /* Reduced from 25vw for better balance */
+    font-weight: 700;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(0, 165, 255, 0.08);
+    text-shadow: 0 0 40px rgba(0, 165, 255, 0.05);
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 0;
+    letter-spacing: -0.02em;
+}
+
+.products-header {
+    padding: 0 var(--gutter);
+    max-width: 800px;
+    margin: 0 auto var(--sp-10) auto;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.products-title-group h2 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    color: var(--navy);
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    margin-bottom: var(--sp-4);
+}
+
+.products-title-group p {
+    color: rgba(11, 45, 94, 0.6);
+    font-size: 1.15rem;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.products-carousel-wrap {
+    width: 100%;
+    padding: var(--sp-4) 0 var(--sp-6) 0;
+    position: relative;
+    z-index: 2;
+    overflow: visible;
+}
+
+.products-track {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    width: max-content;
+    will-change: transform;
+    /* Ensures the first card starts exactly centered in the viewport */
+    padding-left: calc((var(--vw-exact, 100vw) / 2) - (clamp(260px, 24vw, 360px) / 2));
+    padding-right: 0;
+}
+
+/* Fixes browser Flexbox bug: forces trailing scroll space so the last card can perfectly reach the center */
+.products-track::after {
+    content: '';
+    display: block;
+    flex-shrink: 0;
+    width: calc((var(--vw-exact, 100vw) / 2) - (clamp(260px, 24vw, 360px) / 2));
+}
+
+.product-card {
+    width: clamp(260px, 24vw, 360px);
+    flex-shrink: 0;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    padding: var(--sp-8);
+    display: flex;
+    flex-direction: column;
+    height: clamp(360px, 50vh, 440px);
+    position: relative;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 0.6s ease,
+      background 0.6s ease;
+    box-shadow: 0 10px 30px rgba(11, 45, 94, 0.03);
+    user-select: none;
+}
+
+.product-card.active {
+    transform: scale(1.05) translateY(-6px);
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 40px 80px rgba(0, 165, 255, 0.12),
+                0 0 0 1px rgba(0, 165, 255, 0.15) inset;
+    border-color: transparent;
+    z-index: 5;
+}
+
+/* ── Product image area ───────────────────────────────────── */
+.product-img-wrap {
+    width: 100%;
+    height: 50%; /* Adjusted from 45% for better vertical proportion */
+    background: radial-gradient(circle at center, #f0f7ff 0%, #ffffff 100%);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--sp-8);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.product-card.active .product-img-wrap {
+    transform: scale(1.04) translateY(-6px);
+    box-shadow: inset 0 0 0 1px rgba(0, 165, 255, 0.1);
+}
+
+.product-card:not(.active):hover .product-img-wrap {
+    transform: scale(1.02);
+}
+
+.product-img-wrap::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0, 165, 255, 0.15) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+
+.product-card.active .product-img-wrap::after {
+    opacity: 1;
+}
+
+.product-img-wrap svg {
+    width: 45%; /* Much larger, proportionate to the card */
+    height: auto;
+    max-height: 80%;
+    stroke: rgba(11, 45, 94, 0.2);
+    fill: none;
+    stroke-width: 1.2;
+    transition: stroke 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    filter: drop-shadow(0 10px 20px rgba(0, 165, 255, 0.1));
+}
+
+.product-card.active .product-img-wrap svg {
+    stroke: #00A5FF;
+    transform: scale(1.1);
+    animation: fluid-float 3s ease-in-out infinite;
+}
+
+@keyframes fluid-float {
+    0%, 100% { transform: scale(1.1) translateY(0); }
+    50% { transform: scale(1.1) translateY(-6px); }
+}
+
+/* ── Product info ─────────────────────────────────────────── */
+.product-info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.product-name {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 4px;
+    transition: color 0.3s ease;
+}
+
+.product-card.active .product-name {
+    color: #00A5FF;
+}
+
+.product-desc {
+    font-size: clamp(0.8rem, 1vw, 0.9rem);
+    color: rgba(11, 45, 94, 0.6);
+    margin-bottom: var(--sp-6);
+    line-height: 1.4;
+}
+
+.product-btm {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product-price {
+    font-weight: 600;
+    color: var(--navy);
+    font-size: 1.1rem;
+}
+
+.product-btn {
+    padding: 10px 22px;
+    border-radius: 100px;
+    background: #00A5FF;
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.product-btn::before {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--navy);
+    transition: bottom 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    border-radius: 50% 50% 0 0;
+    z-index: -1;
+}
+
+.product-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 165, 255, 0.25);
+}
+
+.product-btn:hover::before {
+    bottom: 0;
+    border-radius: 0;
+}
+
+/* ── Progress bar ─────────────────────────────────────────── */
+.products-progress {
+    max-width: 240px;
+    margin: var(--sp-6) auto 0 auto; /* Completes the symmetrical spacing from the carousel */
+    height: 3px;
+    background: rgba(11, 45, 94, 0.08);
+    border-radius: 3px;
+    overflow: hidden;
+    position: relative;
+}
+
+.products-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #00A5FF, #0b2d5e);
+    border-radius: 3px;
+    will-change: width;
+}
+
+/* ── Mobile: keep the entire pinned card visible ───────────── */
+@media (max-width: 768px) {
+    .products-section {
+        padding: var(--sp-4) 0;
+    }
+
+    .products-header {
+        margin-bottom: var(--sp-6);
+    }
+
+    .products-title-group h2 {
+        font-size: clamp(1.75rem, 7vw, 2.25rem);
+        margin-bottom: var(--sp-3);
+    }
+
+    .products-title-group p {
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+
+    .products-carousel-wrap {
+        padding: var(--sp-3) 0 var(--sp-4) 0;
+    }
+
+    .product-card {
+        height: clamp(300px, 48vh, 360px);
+        padding: var(--sp-6);
+    }
+
+    .product-card.active {
+        transform: scale(1.03) translateY(-4px);
+    }
+
+    .products-progress {
+        margin-top: var(--sp-4);
+    }
+}

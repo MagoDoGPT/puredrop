@@ -1,0 +1,254 @@
+/* ── SECTION 7: TESTIMONIALS (CARD DECK) ──────────────────── */
+.testimonials-section {
+    background: #f0f7ff;
+    width: 100%;
+    height: 100vh; /* Pinned height */
+    position: relative;
+    overflow: hidden;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+}
+
+.test-deck-layout {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 5vw, 80px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+}
+
+/* ── Left Side: Header ────────────────────────────────────── */
+.test-header-side {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+}
+
+.test-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #00A5FF;
+    margin-bottom: var(--sp-6);
+}
+
+.test-label::before {
+    content: '';
+    width: 32px;
+    height: 2px;
+    background: #00A5FF;
+    border-radius: 2px;
+}
+
+.test-heading {
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: var(--sp-5);
+}
+
+.test-heading span {
+    color: #00A5FF;
+}
+
+.test-subtext {
+    font-size: 1.1rem;
+    color: rgba(11, 45, 94, 0.7);
+    line-height: 1.6;
+    margin-bottom: var(--sp-6);
+    max-width: 400px;
+}
+
+.test-trust-badges {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: var(--sp-5);
+    border-top: 1px solid rgba(0, 165, 255, 0.2);
+    width: fit-content;
+}
+
+.trust-stars {
+    font-size: 1.2rem;
+    color: #00A5FF;
+    letter-spacing: 2px;
+}
+
+.test-trust-badges p {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--navy);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+/* ── Right Side: Interactive Card Deck ────────────────────── */
+.test-deck-side {
+    width: 55%;
+    position: relative;
+    height: 500px; /* Fixed height container for absolute cards */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.test-deck-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 550px;
+    height: 100%;
+}
+
+.test-deck-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* transform is handled partly by GSAP, partly by CSS initially */
+    margin-top: -180px; /* Half of height */
+    margin-left: -50%;
+    width: 100%;
+    height: 360px;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 40px;
+    padding: 50px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 40px 80px rgba(0, 40, 80, 0.08), inset 0 0 0 1px rgba(255,255,255,0.5);
+    will-change: transform, opacity;
+    overflow: hidden;
+}
+
+/* Background Quote Mark */
+.card-bg-quote {
+    position: absolute;
+    top: -20px;
+    right: 20px;
+    font-size: 240px;
+    font-weight: 900;
+    color: rgba(0, 165, 255, 0.05);
+    line-height: 1;
+    font-family: serif;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Base stack positions */
+.test-card-0 { z-index: 4; transform: scale(1) translateY(0); opacity: 1; }
+.test-card-1 { z-index: 3; transform: scale(0.9) translateY(40px); opacity: 0.6; }
+.test-card-2 { z-index: 2; transform: scale(0.8) translateY(80px); opacity: 0.3; }
+.test-card-3 { z-index: 1; transform: scale(0.7) translateY(120px); opacity: 0; }
+
+/* ── Card Content ─────────────────────────────────────────── */
+.testimonial-stars, .testimonial-text, .testimonial-author-wrapper {
+    position: relative;
+    z-index: 1;
+}
+
+.testimonial-stars {
+    display: flex;
+    gap: 4px;
+    margin-bottom: var(--sp-4);
+}
+
+.testimonial-stars svg {
+    width: 20px;
+    height: 20px;
+    fill: #00A5FF;
+}
+
+.testimonial-text {
+    font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+    color: var(--navy);
+    line-height: 1.5;
+    font-weight: 500;
+    margin-bottom: var(--sp-6);
+}
+
+.testimonial-author-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: auto;
+}
+
+.testimonial-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #00A5FF, #1565C0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1.4rem;
+    box-shadow: 0 10px 20px rgba(0, 165, 255, 0.2);
+}
+
+.testimonial-author-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.testimonial-author-name {
+    font-weight: 700;
+    color: var(--navy);
+    font-size: 1.05rem;
+}
+
+.testimonial-author-badge {
+    font-size: 0.8rem;
+    color: rgba(11, 45, 94, 0.5);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 2px;
+}
+
+.testimonial-author-badge svg {
+    width: 14px;
+    height: 14px;
+    stroke: #00A5FF;
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 1024px) {
+    .test-deck-layout {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+    }
+    
+    .test-header-side {
+        width: 100%;
+        align-items: center;
+    }
+
+    .test-label::before {
+        display: none;
+    }
+
+    .test-deck-side {
+        width: 100%;
+        margin-top: 40px;
+    }
+
+    .test-deck-card {
+        padding: 40px 30px;
+    }
+}
+

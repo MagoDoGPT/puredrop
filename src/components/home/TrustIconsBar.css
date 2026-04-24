@@ -1,0 +1,110 @@
+/* ── SECTION 4: TRUST ICONS ────────────────────────────────────────── */
+.trust-icons {
+    background: var(--navy);
+    padding: clamp(120px, 15vh, 160px) 0;
+    position: relative;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.trust-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5px; /* Creates hairline borders between cards */
+    background: rgba(255, 255, 255, 0.08); /* Color of the borders */
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+}
+
+.trust-card {
+    background: var(--navy);
+    padding: clamp(30px, 4vw, 50px) var(--sp-4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.4s ease;
+
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.trust-card.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.trust-card:first-child { border-radius: 20px 0 0 20px; }
+.trust-card:last-child { border-radius: 0 20px 20px 0; }
+
+/* Spotlight: each card gets its own --mouse-x / --mouse-y updated by JS */
+.trust-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(0, 165, 255, 0.10),
+    transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    border-radius: inherit;
+}
+
+/* fade-in the spotlight only when cursor is inside the grid */
+.trust-grid:hover .trust-card::before { opacity: 1; }
+
+.trust-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    background: rgba(0, 165, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--sp-6);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), background 0.4s ease;
+    box-shadow: inset 0 0 0 1px rgba(0, 165, 255, 0.15);
+}
+
+.trust-card:hover .trust-icon {
+    transform: translateY(-6px) scale(1.05);
+    background: rgba(0, 165, 255, 0.2);
+}
+
+.trust-icon svg {
+    width: 28px;
+    height: 28px;
+    stroke: #00A5FF;
+    fill: none;
+    stroke-width: 1.5;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+}
+
+.trust-text {
+    color: var(--white);
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+}
+
+@media (max-width: 960px) {
+    .trust-grid { grid-template-columns: repeat(2, 1fr); }
+    .trust-card:first-child { border-radius: 20px 0 0 0; }
+    .trust-card:nth-child(2) { border-radius: 0 20px 0 0; }
+    .trust-card:nth-child(3) { border-radius: 0 0 0 20px; }
+    .trust-card:last-child { border-radius: 0 0 20px 0; }
+}
+@media (max-width: 500px) {
+    .trust-grid { grid-template-columns: 1fr; }
+    .trust-card { border-radius: 0 !important; }
+    .trust-card:first-child { border-radius: 20px 20px 0 0 !important; }
+    .trust-card:last-child { border-radius: 0 0 20px 20px !important; }
+}

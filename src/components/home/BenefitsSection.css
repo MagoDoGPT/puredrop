@@ -1,0 +1,195 @@
+/* ── SECTION 5: THE SCIENCE (3D Z-AXIS TUNNEL) ──────────────────────── */
+.science-tunnel {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Pinned full screen */
+    overflow: hidden;
+    background: linear-gradient(180deg, #ffffff 0%, #f0f7ff 100%);
+    color: var(--color-navy);
+}
+
+/* ── Immersive Ambient Background ─────────────────────────── */
+.sci-ambient-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0) 0%, rgba(21, 101, 192, 0.05) 100%);
+}
+
+.sci-orb {
+    position: absolute;
+    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+    filter: blur(80px);
+    opacity: 0.6;
+}
+
+.sci-orb-1 { 
+    width: 80vw; height: 80vw; 
+    background: rgba(0, 165, 255, 0.15); 
+    top: -20%; left: -10%; 
+}
+
+.sci-orb-2 { 
+    width: 60vw; height: 60vw; 
+    background: rgba(21, 101, 192, 0.12); 
+    bottom: -10%; right: -10%; 
+}
+
+/* ── Flying Particles (Water Depth Effect) ────────────────── */
+.sci-particles {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.sci-particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: #00A5FF;
+    border-radius: 50%;
+    top: 50%; 
+    left: 50%;
+    box-shadow: 0 0 10px rgba(0, 165, 255, 0.5);
+    animation: particle-fly linear infinite;
+    will-change: transform, opacity;
+}
+
+@keyframes particle-fly {
+    0% { transform: translate(-50%, -50%) scale(0.1); opacity: 0; }
+    20% { opacity: 0.5; }
+    100% { transform: translate(var(--dx), var(--dy)) scale(8); opacity: 0; }
+}
+
+/* ── 3D Tunnel Container ──────────────────────────────────── */
+.sci-tunnel-container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+}
+
+.sci-slide {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* transform is controlled purely by GSAP (xPercent, yPercent, scale) */
+    width: 100%;
+    max-width: 1000px;
+    padding: 0 var(--sp-6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    will-change: transform, opacity, filter;
+}
+
+/* ── Slide 1: Intro ───────────────────────────────────────── */
+.sci-label {
+    font-size: clamp(0.7rem, 2vw, 0.9rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #1565C0;
+    margin-bottom: var(--sp-6);
+}
+
+.sci-heading {
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 700;
+    color: var(--color-navy);
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+}
+
+.sci-heading span {
+    font-style: italic;
+    font-weight: 500;
+    background: linear-gradient(120deg, #00A5FF 0%, #1565C0 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    padding-right: 0.1em; /* Prevents the italic question mark from being clipped */
+}
+
+/* ── Slide 2-5: Facts ─────────────────────────────────────── */
+.sci-fact h3 {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 700;
+    color: var(--color-navy);
+    margin-bottom: var(--sp-6);
+    letter-spacing: -0.03em;
+}
+
+.sci-fact p {
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    color: rgba(11, 45, 94, 0.7);
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.sci-fact-icon {
+    width: clamp(80px, 15vw, 140px);
+    height: clamp(80px, 15vw, 140px);
+    margin-bottom: var(--sp-8);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 20px 40px rgba(0, 165, 255, 0.1), inset 0 0 20px rgba(255, 255, 255, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sci-fact-icon svg {
+    width: 45%;
+    height: 45%;
+    stroke: #1565C0;
+    fill: none;
+    stroke-width: 1.5;
+}
+
+/* ── Slide 6: Outro Stats ─────────────────────────────────── */
+.sci-stats-row {
+    display: flex;
+    justify-content: center;
+    gap: clamp(40px, 8vw, 120px);
+    flex-wrap: wrap;
+}
+
+.sci-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--sp-2);
+}
+
+.sci-stat h2 {
+    font-size: clamp(4rem, 10vw, 8rem);
+    font-weight: 700;
+    color: #00A5FF;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    text-shadow: 0 10px 30px rgba(0, 165, 255, 0.15);
+}
+
+.sci-stat span {
+    font-size: clamp(0.7rem, 1.5vw, 1.1rem);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(11, 45, 94, 0.6);
+}
+
+@media (max-width: 768px) {
+    .sci-stats-row {
+        flex-direction: column;
+        gap: var(--sp-12);
+    }
+}

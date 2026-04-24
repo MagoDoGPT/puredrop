@@ -1,0 +1,120 @@
+.track-page { background: #fff; }
+
+.track-hero {
+  position: relative; padding: var(--sp-20) var(--gutter) var(--sp-12);
+  background: radial-gradient(ellipse at 80% 10%, #E3F2FD 0%, #fff 70%);
+  overflow: hidden; text-align: center;
+}
+.track-hero__orb {
+  position: absolute; width: 320px; height: 320px; border-radius: 50%;
+  background: rgba(0,165,255,0.14); filter: blur(90px); top: -60px; right: -40px;
+}
+.track-hero__inner { position: relative; max-width: 640px; margin-inline: auto; }
+.track-hero__eyebrow {
+  display: inline-block; font-size: 0.8rem; font-weight: 600; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--color-cyan); margin-bottom: var(--sp-4);
+}
+.track-hero__title {
+  font-size: clamp(2.2rem, 4.6vw, 3.4rem); font-weight: 700; color: var(--color-navy);
+  letter-spacing: -0.03em; line-height: 1.1; margin-bottom: var(--sp-4);
+}
+.track-hero__subtitle { font-size: 1.05rem; line-height: 1.65; color: rgba(11,45,94,0.7); }
+.track-hero__subtitle a { color: var(--color-cyan); border-bottom: 1px solid currentColor; }
+
+.track-body { padding: var(--sp-12) var(--gutter) var(--sp-24); }
+.track-body__inner { max-width: 680px; margin-inline: auto; }
+
+.track-form {
+  background: #fff; border: 1px solid var(--color-gray-200); border-radius: var(--radius-xl);
+  padding: var(--sp-8);
+  display: grid; grid-template-columns: 1fr 1fr auto; gap: var(--sp-4); align-items: end;
+}
+.track-field { display: flex; flex-direction: column; gap: var(--sp-2); }
+.track-field label {
+  font-size: 0.82rem; font-weight: 600; color: rgba(11,45,94,0.75);
+}
+.track-field input {
+  font-family: inherit; font-size: 1rem; color: var(--color-navy);
+  background: #fff; border: 1.5px solid var(--color-gray-200);
+  border-radius: var(--radius-md); padding: 0.85rem 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.track-field input:focus { outline: none; border-color: var(--color-cyan); box-shadow: 0 0 0 4px rgba(0,165,255,0.14); }
+
+.track-submit {
+  appearance: none; background: var(--color-navy); color: #fff; border: none;
+  font-family: inherit; font-size: 0.92rem; font-weight: 600;
+  padding: 0.95rem 1.8rem; border-radius: var(--radius-full);
+  cursor: pointer; transition: transform 0.3s, background 0.3s;
+  white-space: nowrap;
+}
+.track-submit:hover { transform: translateY(-2px); background: var(--color-blue); }
+
+.track-result {
+  margin-top: var(--sp-8);
+  background: var(--color-gray-50); border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-xl); padding: var(--sp-8);
+}
+.track-result__head {
+  display: grid; grid-template-columns: auto 1fr; gap: var(--sp-2) var(--sp-4);
+  padding-bottom: var(--sp-6); margin-bottom: var(--sp-6);
+  border-bottom: 1px solid var(--color-gray-200);
+}
+.track-result__label {
+  font-size: 0.75rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+  color: rgba(11,45,94,0.55);
+}
+.track-result__value { font-size: 0.95rem; color: var(--color-navy); font-weight: 600; }
+
+.track-steps {
+  list-style: none; padding: 0; margin: 0;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+  position: relative;
+}
+.track-steps::before {
+  content: ''; position: absolute; left: 12%; right: 12%; top: 14px;
+  height: 2px; background: var(--color-gray-200); z-index: 0;
+}
+.track-step {
+  display: flex; flex-direction: column; align-items: center; gap: var(--sp-3);
+  position: relative; z-index: 1;
+}
+.track-step__dot {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: #fff; border: 2px solid var(--color-gray-200);
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.3s;
+}
+.track-step__dot svg { width: 16px; height: 16px; fill: none; stroke: #fff; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.track-step__label {
+  font-size: 0.82rem; font-weight: 500; color: rgba(11,45,94,0.6);
+  text-align: center;
+}
+.track-step--done .track-step__dot { background: var(--color-cyan); border-color: var(--color-cyan); }
+.track-step--done .track-step__label { color: var(--color-navy); font-weight: 600; }
+.track-step--current .track-step__dot {
+  background: var(--color-navy); border-color: var(--color-navy);
+  box-shadow: 0 0 0 6px rgba(11,45,94,0.15);
+}
+
+@media (max-width: 640px) {
+  .track-form { grid-template-columns: 1fr; }
+  .track-steps { grid-template-columns: 1fr; gap: var(--sp-4); }
+  .track-steps::before { display: none; }
+  .track-step { flex-direction: row; justify-content: flex-start; gap: var(--sp-4); }
+}
+
+.track-error {
+  margin-top: var(--sp-4);
+  color: #b91c1c;
+  font-size: 0.9rem;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  padding: 0.7rem 1rem;
+  border-radius: var(--radius-md);
+}
+
+.track-submit:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}

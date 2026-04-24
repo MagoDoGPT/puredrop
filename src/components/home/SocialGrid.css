@@ -1,0 +1,212 @@
+/* ── SECTION 8: SOCIAL GRID (INFINITY MARQUEE) ────────────── */
+.social-section {
+    background: var(--navy);
+    /* Calculate: 120px for the wave + 120px for visual spacing = 240px min */
+    padding: clamp(240px, 25vh, 300px) 0 clamp(120px, 15vh, 160px);
+    position: relative;
+    overflow: hidden;
+    color: var(--white);
+    z-index: 10;
+}
+
+/* ── Top Transition (Diving back into water) ────────────── */
+.social-top-transition {
+    position: absolute;
+    top: -1px; /* Align precisely with the top to prevent 1px gap */
+    left: 0;
+    width: 100%;
+    height: 120px;
+    z-index: 10;
+    pointer-events: none;
+    transform: rotate(180deg); /* Flip upside down to connect the flat edge to Testimonials */
+    overflow: hidden;
+}
+
+.social-wave-svg {
+    width: 200%;
+    height: 100%;
+    display: block;
+    animation: wave-horizontal-flow 20s linear infinite reverse;
+}
+
+/* ── Header Area ────────────────────────────────────────── */
+.social-container {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 5vw, 80px);
+    position: relative;
+    z-index: 2;
+}
+
+.social-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: clamp(60px, 8vh, 80px);
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+.social-title-area {
+    display: flex;
+    flex-direction: column;
+}
+
+.social-heading {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+}
+
+.social-handle {
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
+    color: #00A5FF;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    margin-top: var(--sp-2);
+}
+
+.social-follow-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 32px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    color: var(--white);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.social-follow-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.social-follow-btn:hover {
+    background: #00A5FF;
+    border-color: #00A5FF;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 165, 255, 0.2);
+}
+
+/* ── Infinite Marquee Grid ──────────────────────────────── */
+.social-marquee-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100vw;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    overflow: hidden;
+}
+
+.social-marquee-row {
+    display: flex;
+    width: max-content;
+}
+
+.marquee-content {
+    display: flex;
+    gap: 24px;
+    padding-right: 24px; /* Essential for seamless loop */
+}
+
+/* Animations */
+.row-left {
+    animation: marquee-left 40s linear infinite;
+}
+
+.row-right {
+    margin-left: -150px;
+    animation: marquee-right 40s linear infinite;
+}
+
+@keyframes marquee-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-right {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+}
+
+/* Pause on hover! */
+.social-marquee-row:hover {
+    animation-play-state: paused;
+}
+
+.social-item {
+    position: relative;
+    flex: 0 0 auto;
+    width: clamp(250px, 20vw, 350px);
+    aspect-ratio: 1 / 1;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
+}
+
+.social-item:hover {
+    transform: scale(0.98);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Placeholder for when actual images are added */
+.social-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0, 165, 255, 0.1), rgba(0, 0, 0, 0));
+    opacity: 0.5;
+}
+
+.social-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 40, 80, 0.6);
+    backdrop-filter: blur(5px);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.social-overlay svg {
+    width: 48px;
+    height: 48px;
+    color: var(--white);
+    transform: translateY(20px);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.social-item:hover .social-overlay {
+    opacity: 1;
+}
+
+.social-item:hover .social-overlay svg {
+    transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+    .social-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .social-item {
+        width: 200px;
+    }
+}

@@ -1,0 +1,109 @@
+.legal-page {
+  background: #fff;
+}
+
+.legal-hero {
+  position: relative;
+  padding: var(--sp-20) var(--gutter) var(--sp-12);
+  background: radial-gradient(ellipse at 70% 10%, #E3F2FD 0%, #ffffff 65%);
+  overflow: hidden;
+}
+
+.legal-hero__orb {
+  position: absolute;
+  top: -120px;
+  right: -80px;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: rgba(21, 101, 192, 0.12);
+  filter: blur(90px);
+  pointer-events: none;
+}
+
+.legal-hero__inner {
+  position: relative;
+  max-width: var(--container-narrow);
+  margin-inline: auto;
+}
+
+.legal-hero__eyebrow {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 2.2px;
+  text-transform: uppercase;
+  color: var(--color-cyan);
+  margin-bottom: var(--sp-4);
+}
+
+.legal-hero__title {
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 700;
+  color: var(--color-navy);
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  margin-bottom: var(--sp-3);
+}
+
+.legal-hero__updated {
+  font-size: 0.9rem;
+  color: rgba(11, 45, 94, 0.6);
+}
+
+.legal-body {
+  padding: var(--sp-12) var(--gutter) var(--sp-24);
+}
+
+.legal-body__inner {
+  max-width: var(--container-narrow);
+  margin-inline: auto;
+}
+
+.legal-body h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  margin: var(--sp-10) 0 var(--sp-4);
+  letter-spacing: -0.015em;
+}
+
+.legal-body h2:first-child {
+  margin-top: 0;
+}
+
+.legal-body h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-navy);
+  margin: var(--sp-6) 0 var(--sp-3);
+}
+
+.legal-body p {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: rgba(11, 45, 94, 0.78);
+  margin-bottom: var(--sp-4);
+}
+
+.legal-body ul,
+.legal-body ol {
+  padding-left: var(--sp-6);
+  margin-bottom: var(--sp-5);
+}
+
+.legal-body li {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: rgba(11, 45, 94, 0.78);
+  margin-bottom: var(--sp-2);
+}
+
+.legal-body a {
+  color: var(--color-cyan);
+  border-bottom: 1px solid currentColor;
+}
+
+.legal-body a:hover {
+  color: var(--color-navy);
+}

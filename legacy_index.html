@@ -1,0 +1,2732 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PureDrop — Premium Water Purification</title>
+
+  <!-- Google Fonts: DM Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&display=swap"
+    rel="stylesheet" />
+
+  <!-- GSAP + ScrollTrigger for premium animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+
+  <style>
+    /* ============================================================
+       CSS VARIABLES — PureDrop Blue Palette
+       ============================================================ */
+    :root {
+      --navy: #0B2D5E;
+      --blue: #1565C0;
+      --blue-light: #EBF5FF;
+      --white: #FFFFFF;
+
+      --text-primary: var(--navy);
+      --bg-primary: var(--white);
+      --bg-accent: var(--blue);
+      /* primary = light blue */
+      --bg-footer: var(--blue-light);
+
+      --btn-bg: var(--blue);
+      /* primary = light blue */
+      --btn-text: var(--white);
+      --btn-radius: 8px;
+      --border-color: rgba(11, 45, 94, 0.12);
+
+      --font: 'DM Sans', sans-serif;
+
+      --text-h0: 3rem;
+      --text-h1: 2.5rem;
+      --text-h2: 2rem;
+      --text-h3: 1.5rem;
+      --text-h4: 1.375rem;
+      --text-sm: 0.875rem;
+      --text-xs: 0.75rem;
+
+      --heading-letter-spacing: -0.005em;
+      --body-letter-spacing: 0.015em;
+
+      --container-max: 1400px;
+      --container-narrow: 1150px;
+      --gutter: clamp(1.25rem, 4vw, 2.5rem);
+
+      --sp-2: 0.5rem;
+      --sp-4: 1rem;
+      --sp-6: 1.5rem;
+      --sp-8: 2rem;
+      --sp-10: 2.5rem;
+      --sp-12: 3rem;
+      --sp-16: 4rem;
+      --sp-20: 5rem;
+      --sp-24: 6rem;
+
+      --shadow-sm: 0 2px 8px rgba(11, 45, 94, 0.10);
+      --shadow: 0 5px 15px rgba(11, 45, 94, 0.10);
+      --shadow-md: 0 8px 40px rgba(11, 45, 94, 0.13);
+
+      --rounded: 8px;
+      --rounded-lg: 12px;
+      --rounded-xl: 16px;
+    }
+
+    /* ============================================================
+       RESET & BASE
+       ============================================================ */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* REMOVED scroll-behavior: smooth as it severely breaks GSAP ScrollTrigger and causes black flashing / page skips */
+    body {
+      font-family: var(--font);
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--text-primary);
+      background: var(--bg-primary);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    button {
+      cursor: pointer;
+      font-family: var(--font);
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--container-max);
+      margin-inline: auto;
+      padding-inline: var(--gutter);
+    }
+
+    /* ============================================================
+       SECTION 0 — ANNOUNCEMENT BAR
+       ============================================================ */
+    .announcement-bar {
+      background: #E8F4FA;
+      color: var(--navy);
+      text-align: center;
+      padding: 0.55rem var(--gutter);
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(11, 45, 94, 0.05);
+    }
+
+    .announcement-bar__inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--sp-4);
+    }
+
+    .announcement-bar__arrow {
+      background: none;
+      border: none;
+      color: var(--white);
+      opacity: 0.55;
+      font-size: 1.1rem;
+      line-height: 1;
+      padding: 0 var(--sp-2);
+      transition: opacity 0.2s;
+    }
+
+    .announcement-bar__arrow:hover {
+      opacity: 1;
+    }
+
+    /* ============================================================
+       SECTION 1 — NAVIGATION + MEGA-MENUS
+       ============================================================ */
+    .site-header-group {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+    }
+
+    .site-header {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(11, 45, 94, 0.05);
+      height: 64px;
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    .site-header__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--sp-8);
+      width: 100%;
+      max-width: var(--container-max);
+      margin-inline: auto;
+      padding-inline: var(--gutter);
+    }
+
+    /* ── Logo ─────────────────────────────────────────────────── */
+    .site-logo {
+      font-size: 1.1rem;
+      font-weight: 400;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--navy);
+      white-space: nowrap;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+
+    .site-logo strong {
+      font-weight: 700;
+      color: #00A5FF;
+    }
+
+    /* ── Primary nav ──────────────────────────────────────────── */
+    .site-nav {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-6);
+      height: 64px;
+    }
+
+    .site-nav__item {
+      position: static;
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    .site-nav__link {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: var(--text-sm);
+      font-weight: 500;
+      color: var(--navy);
+      letter-spacing: 0.01em;
+      height: 100%;
+      transition: opacity 0.2s;
+      white-space: nowrap;
+    }
+
+    .site-nav__link:hover {
+      opacity: 0.6;
+    }
+
+    /* Chevron */
+    .site-nav__link .chevron {
+      width: 12px;
+      height: 12px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2.2;
+      transition: transform 0.25s;
+      flex-shrink: 0;
+    }
+
+    .site-nav__item:hover .chevron {
+      transform: rotate(180deg);
+    }
+
+    /* ── MEGA-MENU (full-width panel) ─────────────────────────── */
+    .mega-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      width: 100%;
+      background: #fff;
+      border-top: 1px solid rgba(11, 45, 94, 0.05);
+      border-bottom: 1px solid rgba(11, 45, 94, 0.05);
+      box-shadow: 0 20px 40px rgba(11, 45, 94, 0.08);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(0);
+      transition: opacity 0.22s ease, visibility 0.22s;
+    }
+
+    /* Invisible bridge: fills the gap between nav link and panel
+       so the mouse never leaves the hover zone */
+    .mega-menu::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: 0;
+      right: 0;
+      height: 20px;
+    }
+
+    .site-nav__item:hover .mega-menu {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: all;
+    }
+
+    .mega-menu__inner {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 0;
+      max-width: var(--container-max);
+      margin-inline: auto;
+      padding-inline: var(--gutter);
+      padding-block: var(--sp-8);
+    }
+
+    /* Left column — text links */
+    .mega-menu__links {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      padding-right: var(--sp-8);
+      border-right: 1px solid rgba(11, 45, 94, 0.05);
+    }
+
+    .mega-menu__link {
+      display: block;
+      padding: 0.6rem 0;
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: rgba(11, 45, 94, 0.8);
+      border-bottom: 1px solid rgba(11, 45, 94, 0.05);
+      transition: color 0.15s, padding-left 0.15s;
+    }
+
+    .mega-menu__link:first-child {
+      padding-top: 0;
+    }
+
+    .mega-menu__link:last-child {
+      border-bottom: none;
+    }
+
+    .mega-menu__link:hover {
+      color: #00A5FF;
+      padding-left: 6px;
+    }
+
+    /* Right column — 2 featured cards side by side */
+    .mega-menu__cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--sp-6);
+      padding-left: var(--sp-8);
+    }
+
+    .mega-menu__card {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-2);
+      transition: opacity 0.2s;
+    }
+
+    .mega-menu__card:hover {
+      opacity: 0.8;
+    }
+
+    .mega-menu__card-img {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      background: var(--blue-light);
+      border-radius: var(--rounded);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mega-menu__card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .mega-menu__card-img-placeholder {
+      width: 48px;
+      height: 48px;
+      opacity: 0.25;
+      stroke: var(--navy);
+      fill: none;
+      stroke-width: 1.2;
+    }
+
+    .mega-menu__card-title {
+      font-size: var(--text-sm);
+      font-weight: 700;
+      color: var(--navy);
+      margin-top: var(--sp-2);
+    }
+
+    .mega-menu__card-desc {
+      font-size: var(--text-xs);
+      color: rgba(11, 45, 94, 0.6);
+      line-height: 1.55;
+    }
+
+    /* ── Header icons ─────────────────────────────────────────── */
+    .site-header__icons {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+      flex-shrink: 0;
+    }
+
+    .header-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      color: var(--navy);
+      background: none;
+      border: none;
+      transition: background 0.2s;
+      position: relative;
+    }
+
+    .header-icon:hover {
+      background: rgba(11, 45, 94, 0.05);
+    }
+
+    .header-icon svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.6;
+    }
+
+    .header-icon__badge {
+      position: absolute;
+      top: 3px;
+      right: 3px;
+      width: 15px;
+      height: 15px;
+      background: #00A5FF;
+      color: #fff;
+      border-radius: 50%;
+      font-size: 0.55rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ── Mobile hamburger ─────────────────────────────────────── */
+    .site-header__hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 36px;
+      height: 36px;
+      background: none;
+      border: none;
+      padding: 6px;
+    }
+
+    .site-header__hamburger span {
+      display: block;
+      width: 100%;
+      height: 1.5px;
+      background: var(--navy);
+      border-radius: 2px;
+    }
+
+    @media (max-width: 960px) {
+      .site-nav {
+        display: none;
+      }
+
+      .site-header__hamburger {
+        display: flex;
+      }
+    }
+
+    /* ============================================================
+       SECTION 2 — HERO (Awwwards-level)
+       Cinematic text reveal · Clip-path product entrance ·
+       Canvas particles · Magnetic cursor · Liquid wave CTA ·
+       3D parallax · Morphing waves · Ambient orbs
+       ============================================================ */
+    .hero {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: radial-gradient(ellipse at 80% 20%, #ffffff 0%, #e8f4fc 100%);
+    }
+
+    /* GSAP creates a .pin-spacer wrapper when pinning.
+       Without a background it briefly flashes the body color
+       during pin/unpin transitions. Force white on all spacers. */
+    .pin-spacer {
+      background: #ffffff !important;
+    }
+
+    /* ── Scroll-driven Background Video ──────────────────────── */
+    .hero__bg-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+
+    .hero__video-fade {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.75) 40%, rgba(255, 255, 255, 0) 75%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .hero__bottom-gradient {
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 280px;
+      background: linear-gradient(to top, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    /* ── Animated liquid blob behind the hero ────────────────── */
+    .hero__gooey-wrap {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      filter: url('#goo');
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .hero__blob {
+      position: absolute;
+      border-radius: 50%;
+      background: #00A5FF;
+      opacity: 0.12;
+      mix-blend-mode: multiply;
+      will-change: transform;
+    }
+
+    .hero__blob--1 {
+      width: 500px;
+      height: 500px;
+      top: 10%;
+      right: 10%;
+      animation: blob-1 12s infinite alternate ease-in-out;
+    }
+
+    .hero__blob--2 {
+      width: 400px;
+      height: 400px;
+      top: 30%;
+      right: -5%;
+      animation: blob-2 15s infinite alternate ease-in-out;
+    }
+
+    .hero__blob--3 {
+      width: 600px;
+      height: 600px;
+      bottom: -10%;
+      right: 20%;
+      animation: blob-3 18s infinite alternate ease-in-out;
+      background: #0b4a8a;
+    }
+
+    @keyframes blob-1 {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      100% {
+        transform: translate(-100px, 100px) scale(1.2);
+      }
+    }
+
+    @keyframes blob-2 {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      100% {
+        transform: translate(-150px, -50px) scale(0.9);
+      }
+    }
+
+    @keyframes blob-3 {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      100% {
+        transform: translate(100px, -150px) scale(1.1);
+      }
+    }
+
+    /* ── Canvas particle background ───────────────────────────── */
+    .hero__canvas {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* ── Animated gradient overlay removed for dark theme ────────────────────────── */
+
+    /* ── SVG morphing wave at bottom ──────────────────────────── */
+    .hero__wave-wrap {
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      z-index: 8;
+      line-height: 0;
+    }
+
+    .hero__wave-wrap svg {
+      width: 100%;
+      height: 90px;
+      display: block;
+    }
+
+    /* ── Water ripple rings ────────────────────────────────────── */
+    .hero__ripples {
+      position: absolute;
+      top: 50%;
+      right: 22%;
+      transform: translate(50%, -50%);
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .hero__ripple {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(21, 101, 192, 0.08);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: ripple-expand 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+
+    .hero__ripple:nth-child(1) {
+      width: 160px;
+      height: 160px;
+      animation-delay: 0s;
+    }
+
+    .hero__ripple:nth-child(2) {
+      width: 280px;
+      height: 280px;
+      animation-delay: 1.2s;
+    }
+
+    .hero__ripple:nth-child(3) {
+      width: 400px;
+      height: 400px;
+      animation-delay: 2.4s;
+    }
+
+    .hero__ripple:nth-child(4) {
+      width: 520px;
+      height: 520px;
+      animation-delay: 3.6s;
+    }
+
+    .hero__ripple:nth-child(5) {
+      width: 640px;
+      height: 640px;
+      animation-delay: 4.8s;
+    }
+
+    @keyframes ripple-expand {
+      0% {
+        opacity: 0.4;
+        transform: translate(-50%, -50%) scale(0.8);
+      }
+
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1.15);
+      }
+    }
+
+    /* ── Floating ambient orbs ─────────────────────────────────── */
+    .hero__orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 2;
+      will-change: transform;
+    }
+
+    .hero__orb--1 {
+      width: 350px;
+      height: 350px;
+      background: rgba(21, 101, 192, 0.14);
+      top: 5%;
+      left: 0%;
+      animation: orb-1 14s ease-in-out infinite alternate;
+    }
+
+    .hero__orb--2 {
+      width: 250px;
+      height: 250px;
+      background: rgba(80, 160, 255, 0.10);
+      bottom: 15%;
+      right: 5%;
+      animation: orb-2 18s ease-in-out infinite alternate;
+    }
+
+    .hero__orb--3 {
+      width: 180px;
+      height: 180px;
+      background: rgba(21, 101, 192, 0.08);
+      top: 55%;
+      left: 35%;
+      animation: orb-3 20s ease-in-out infinite alternate;
+    }
+
+    @keyframes orb-1 {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      33% {
+        transform: translate(40px, 20px) scale(1.05);
+      }
+
+      66% {
+        transform: translate(-20px, 40px) scale(0.95);
+      }
+
+      100% {
+        transform: translate(30px, -10px) scale(1.1);
+      }
+    }
+
+    @keyframes orb-2 {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      50% {
+        transform: translate(-30px, -25px) scale(1.08);
+      }
+
+      100% {
+        transform: translate(20px, 15px) scale(0.96);
+      }
+    }
+
+    @keyframes orb-3 {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      50% {
+        transform: translate(25px, -30px) scale(1.12);
+      }
+
+      100% {
+        transform: translate(-15px, 20px) scale(0.9);
+      }
+    }
+
+    /* ── Cursor glow removed per user request ────────────────── */
+
+    /* ── Main content grid ─────────────────────────────────────── */
+    .hero__inner {
+      position: relative;
+      z-index: 5;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      gap: var(--sp-12);
+      width: 100%;
+      max-width: var(--container-max);
+      margin-inline: auto;
+      padding-inline: var(--gutter);
+      padding-block: var(--sp-20) var(--sp-24);
+    }
+
+    /* ── Left: text content ───────────────────────────────────── */
+    .hero__content {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-6);
+    }
+
+    /* All text elements hidden — GSAP reveals them cinematically */
+    .hero__eyebrow,
+    .hero__heading,
+    .hero__subtext,
+    .hero__cta-wrap,
+    .hero__badges {
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+
+    .hero__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #00A5FF;
+      width: fit-content;
+    }
+
+    .hero__eyebrow-line {
+      width: 0px;
+      height: 1.5px;
+      background: #00A5FF;
+      border-radius: 2px;
+      display: inline-block;
+    }
+
+    .hero__heading {
+      font-size: clamp(3.2rem, 6vw, 5.2rem);
+      font-weight: 700;
+      line-height: 1.02;
+      letter-spacing: -0.035em;
+      color: var(--navy);
+      overflow: hidden;
+    }
+
+    .hero__heading-line {
+      display: block;
+      overflow: hidden;
+    }
+
+    .hero__heading-line span {
+      display: inline-block;
+      transform: translateY(110%);
+      will-change: transform;
+      padding-right: 0.05em;
+    }
+
+    /* Gradient accent on "purifies" */
+    .hero__heading-accent {
+      background: linear-gradient(135deg, #00A5FF 0%, #0066CC 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      padding-right: 0.1em;
+    }
+
+    .hero__subtext {
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: rgba(11, 45, 94, 0.7);
+      max-width: 480px;
+    }
+
+    /* ── CTA with liquid wave fill ────────────────────────────── */
+    .hero__cta-wrap {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-6);
+      padding-top: var(--sp-2);
+    }
+
+    .hero__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 1.15rem 2.8rem;
+      background: rgba(255, 255, 255, 0.6);
+      /* Clean Glassmorphism */
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(0, 165, 255, 0.3);
+      color: var(--navy);
+      font-size: var(--text-sm);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      cursor: pointer;
+      border-radius: 60px;
+      box-shadow: 0 4px 30px rgba(0, 165, 255, 0.15);
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease, border-color 0.4s ease, color 0.4s;
+    }
+
+    /* CSS liquid filling glass effect inside button on hover */
+    .hero__cta-wave {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+      border-radius: 60px;
+      pointer-events: none;
+    }
+
+    .hero__cta-wave::before {
+      content: '';
+      position: absolute;
+      top: 115%;
+      left: 0;
+      width: 100%;
+      height: 200%;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M0,10 Q25,0 50,10 T100,10 L100,100 L0,100 Z' fill='%2300A5FF'/%3E%3C/svg%3E") repeat-x;
+      background-size: 50% 100%;
+      /* Creates exactly two smaller waves */
+      transition: top 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+      animation: drift-wave 1.5s linear infinite;
+    }
+
+    @keyframes drift-wave {
+      0% {
+        background-position-x: 0%;
+      }
+
+      100% {
+        background-position-x: 100%;
+      }
+    }
+
+    .hero__cta:hover .hero__cta-wave::before {
+      top: 0%;
+    }
+
+    .hero__cta:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 10px 40px rgba(0, 165, 255, 0.3);
+      border-color: rgba(0, 165, 255, 0.8);
+      color: #fff;
+    }
+
+    /* Shimmer sweep */
+    .hero__cta::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+      z-index: 2;
+      pointer-events: none;
+      animation: cta-shimmer 5s ease-in-out 1.5s infinite;
+    }
+
+    @keyframes cta-shimmer {
+
+      0%,
+      100% {
+        left: -100%;
+      }
+
+      30% {
+        left: 150%;
+      }
+    }
+
+    .hero__cta-arrow {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .hero__cta:hover .hero__cta-arrow {
+      transform: translateX(6px);
+    }
+
+    /* Secondary CTA — underline reveal */
+    .hero__cta-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: var(--text-sm);
+      font-weight: 500;
+      color: rgba(11, 45, 94, 0.6);
+      text-decoration: none;
+      position: relative;
+      transition: opacity 0.3s, gap 0.3s, color 0.3s;
+    }
+
+    .hero__cta-secondary::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0%;
+      height: 1px;
+      background: #00A5FF;
+      transition: width 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .hero__cta-secondary:hover {
+      opacity: 1;
+      gap: 0.7rem;
+      color: var(--navy);
+    }
+
+    .hero__cta-secondary:hover::after {
+      width: 100%;
+    }
+
+    .hero__cta-secondary svg {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      transition: transform 0.3s ease;
+    }
+
+    .hero__cta-secondary:hover svg {
+      transform: translateX(3px);
+    }
+
+    /* ── Right: product with 3D parallax ──────────────────────── */
+    .hero__image {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 500px;
+      position: relative;
+      perspective: 1000px;
+    }
+
+    .hero__parallax-layer {
+      position: relative;
+      z-index: 3;
+      will-change: transform;
+      transform-style: preserve-3d;
+    }
+
+    .hero__product-float {
+      animation: product-float 6s ease-in-out infinite;
+    }
+
+    @keyframes product-float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-18px);
+      }
+    }
+
+    /* ── Apple-Style Specs Bar ────────────────────────────────── */
+    .hero__specs {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      margin-top: var(--sp-8);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--navy);
+      opacity: 0;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .hero__spec {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero__spec svg {
+      opacity: 0.7;
+    }
+
+    .hero__spec-divider {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--navy);
+      opacity: 0.2;
+    }
+
+    /* ── Circular Scroll Indicator ────────────────────────────── */
+    .hero__scroll-indicator {
+      position: absolute;
+      bottom: 120px;
+      right: max(var(--gutter), calc((100vw - var(--container-max)) / 2 + var(--gutter)));
+      width: 120px;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      opacity: 0;
+    }
+
+    .hero__scroll-text-svg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      animation: indicator-spin 12s linear infinite;
+    }
+
+    .hero__scroll-text-svg text {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      fill: #ffffff;
+    }
+
+    .hero__scroll-arrow {
+      width: 24px;
+      height: 24px;
+      color: #ffffff;
+      animation: indicator-bounce 2s infinite ease-in-out;
+      opacity: 0.9;
+    }
+
+    @keyframes indicator-spin {
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes indicator-bounce {
+
+      0%,
+      100% {
+        transform: translateY(-3px);
+      }
+
+      50% {
+        transform: translateY(3px);
+      }
+    }
+
+    .hero__badge svg {
+      width: 14px;
+      height: 14px;
+      stroke: #00A5FF;
+      fill: none;
+      stroke-width: 2;
+      flex-shrink: 0;
+    }
+
+    /* ── Scroll indicator ─────────────────────────────────────── */
+    .hero__scroll-hint {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0;
+    }
+
+    .hero__scroll-hint span {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--navy);
+      opacity: 0.3;
+      font-weight: 600;
+    }
+
+    .hero__scroll-mouse {
+      width: 22px;
+      height: 34px;
+      border: 1.5px solid rgba(11, 45, 94, 0.25);
+      border-radius: 12px;
+      position: relative;
+    }
+
+    .hero__scroll-mouse::before {
+      content: '';
+      position: absolute;
+      top: 7px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2.5px;
+      height: 7px;
+      border-radius: 3px;
+      background: var(--blue);
+      animation: scroll-wheel 2s ease-in-out infinite;
+    }
+
+    @keyframes scroll-wheel {
+      0% {
+        top: 7px;
+        opacity: 1;
+      }
+
+      100% {
+        top: 19px;
+        opacity: 0;
+      }
+    }
+
+    /* ── SECTION 3: SUPERIOR PRODUCTS CAROUSEL ─────────────────────────── */
+    .products-section {
+      background: radial-gradient(150% 100% at 50% 10%, #ffffff 40%, #e6f4fc 100%);
+      overflow: hidden;
+      position: relative;
+      z-index: 10;
+
+      /* Ensure it fits exactly in the viewport height so cards never cut off */
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(30px, 8vh, 100px) 0;
+    }
+
+    /* Ambient fluid background behind the carousel */
+    .products-ambient-blob {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 60vw;
+      height: 60vw;
+      background: radial-gradient(circle, rgba(0, 165, 255, 0.08) 0%, rgba(0, 165, 255, 0) 70%);
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      filter: blur(60px);
+      pointer-events: none;
+      z-index: 1;
+      animation: ambient-drift 20s infinite alternate cubic-bezier(0.4, 0, 0.6, 1);
+    }
+
+    @keyframes ambient-drift {
+      0%   { transform: translate(-60%, -40%) scale(1); }
+      100% { transform: translate(-40%, -60%) scale(1.1) rotate(15deg); }
+    }
+
+    /* Wave divider hidden — hero bottom-gradient handles the blend seamlessly */
+    .products-top-wave {
+      display: none;
+    }
+
+    /* Huge background typography for parallax */
+    .products-bg-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 25vw;
+      font-weight: 700;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(0, 165, 255, 0.1);
+      text-shadow: 0 0 30px rgba(0, 165, 255, 0.15);
+      white-space: nowrap;
+      pointer-events: none;
+      z-index: 0;
+      letter-spacing: -0.05em;
+    }
+
+    .products-header {
+      padding: 0 var(--gutter);
+      max-width: var(--container-max);
+      margin: 0 auto clamp(20px, 4vh, 60px) auto;
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .products-title-group h2 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      color: var(--navy);
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin-bottom: var(--sp-4);
+    }
+
+    .products-title-group p {
+      color: rgba(11, 45, 94, 0.6);
+      font-size: 1.15rem;
+      line-height: 1.6;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .products-carousel-wrap {
+      width: 100%;
+      padding: 0 0 clamp(20px, 4vh, 40px) 0;
+      position: relative;
+      z-index: 2;
+      overflow: visible;
+    }
+
+    .products-track {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      width: max-content;
+      will-change: transform;
+      /* first card starts at viewport center minus half card width */
+      padding-left: calc((100vw - clamp(280px, 24vw, 360px)) / 2);
+      padding-right: calc((100vw - clamp(280px, 24vw, 360px)) / 2);
+    }
+
+    .product-card {
+      width: clamp(260px, 24vw, 360px);
+      flex-shrink: 0;
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      padding: var(--sp-8);
+      display: flex;
+      flex-direction: column;
+      height: clamp(380px, 55vh, 480px);
+      position: relative;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.6s ease,
+        background 0.6s ease;
+      box-shadow: 0 10px 30px rgba(11, 45, 94, 0.03);
+      user-select: none;
+    }
+
+    .product-card.active {
+      transform: scale(1.08) translateY(-10px);
+      background: rgba(255, 255, 255, 1);
+      box-shadow: 0 40px 80px rgba(0, 165, 255, 0.12),
+                  0 0 0 1px rgba(0, 165, 255, 0.15) inset;
+      border-color: transparent;
+      z-index: 5;
+    }
+
+    /* ── Product image area ───────────────────────────────────── */
+    .product-img-wrap {
+      width: 100%;
+      height: 45%;
+      background: radial-gradient(circle at center, #f0f7ff 0%, #ffffff 100%);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: var(--sp-6);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .product-card.active .product-img-wrap {
+      transform: scale(1.04) translateY(-6px);
+      box-shadow: inset 0 0 0 1px rgba(0, 165, 255, 0.1);
+    }
+
+    .product-card:not(.active):hover .product-img-wrap {
+      transform: scale(1.02);
+    }
+
+    .product-img-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(0, 165, 255, 0.15) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+
+    .product-card.active .product-img-wrap::after {
+      opacity: 1;
+    }
+
+    .product-img-wrap svg {
+      width: 48px;
+      height: 48px;
+      stroke: rgba(11, 45, 94, 0.15);
+      fill: none;
+      stroke-width: 1.2;
+      transition: stroke 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .product-card.active .product-img-wrap svg {
+      stroke: #00A5FF;
+      transform: scale(1.1);
+      animation: fluid-float 3s ease-in-out infinite;
+    }
+
+    @keyframes fluid-float {
+      0%, 100% { transform: scale(1.1) translateY(0); }
+      50% { transform: scale(1.1) translateY(-6px); }
+    }
+
+    /* ── Product info ─────────────────────────────────────────── */
+    .product-info {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .product-name {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 4px;
+      transition: color 0.3s ease;
+    }
+
+    .product-card.active .product-name {
+      color: #00A5FF;
+    }
+
+    .product-desc {
+      font-size: clamp(0.8rem, 1vw, 0.9rem);
+      color: rgba(11, 45, 94, 0.6);
+      margin-bottom: var(--sp-6);
+      line-height: 1.4;
+    }
+
+    .product-btm {
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .product-price {
+      font-weight: 600;
+      color: var(--navy);
+      font-size: 1.1rem;
+    }
+
+    .product-btn {
+      padding: 10px 22px;
+      border-radius: 100px;
+      background: #00A5FF;
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .product-btn::before {
+      content: '';
+      position: absolute;
+      bottom: 100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--navy);
+      transition: bottom 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      border-radius: 50% 50% 0 0;
+      z-index: -1;
+    }
+
+    .product-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 165, 255, 0.25);
+    }
+
+    .product-btn:hover::before {
+      bottom: 0;
+      border-radius: 0;
+    }
+
+    /* ── SECTION 4: TRUST ICONS ────────────────────────────────────────── */
+    .trust-icons {
+      background: var(--navy);
+      padding: clamp(60px, 8vh, 100px) 0;
+      position: relative;
+      overflow: hidden;
+      z-index: 10;
+    }
+    
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5px; /* Creates hairline borders between cards */
+      background: rgba(255, 255, 255, 0.08); /* Color of the borders */
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+    }
+
+    .trust-card {
+      background: var(--navy);
+      padding: clamp(30px, 4vw, 50px) var(--sp-4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.4s ease;
+    }
+
+    .trust-card:first-child { border-radius: 20px 0 0 20px; }
+    .trust-card:last-child { border-radius: 0 20px 20px 0; }
+
+    /* Spotlight: each card gets its own --mouse-x / --mouse-y updated by JS */
+    .trust-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(0, 165, 255, 0.10),
+        transparent 70%
+      );
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+      border-radius: inherit;
+    }
+    /* fade-in the spotlight only when cursor is inside the grid */
+    .trust-grid:hover .trust-card::before { opacity: 1; }
+
+    .trust-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      background: rgba(0, 165, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: var(--sp-6);
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), background 0.4s ease;
+      box-shadow: inset 0 0 0 1px rgba(0, 165, 255, 0.15);
+    }
+    
+    .trust-card:hover .trust-icon {
+      transform: translateY(-6px) scale(1.05);
+      background: rgba(0, 165, 255, 0.2);
+    }
+
+    .trust-icon svg {
+      width: 28px;
+      height: 28px;
+      stroke: #00A5FF;
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linejoin: round;
+      stroke-linecap: round;
+    }
+
+    .trust-text {
+      color: var(--white);
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    @media (max-width: 960px) {
+      .trust-grid { grid-template-columns: repeat(2, 1fr); }
+      .trust-card:first-child { border-radius: 20px 0 0 0; }
+      .trust-card:nth-child(2) { border-radius: 0 20px 0 0; }
+      .trust-card:nth-child(3) { border-radius: 0 0 0 20px; }
+      .trust-card:last-child { border-radius: 0 0 20px 0; }
+    }
+    @media (max-width: 500px) {
+      .trust-grid { grid-template-columns: 1fr; }
+      .trust-card { border-radius: 0 !important; }
+      .trust-card:first-child { border-radius: 20px 20px 0 0 !important; }
+      .trust-card:last-child { border-radius: 0 0 20px 20px !important; }
+    }
+
+    /* ── SECTION 5: SCIENCE / WHY FILTER ──────────────────────── */
+    .science-section {
+      background: linear-gradient(180deg, var(--navy) 0%, #0a2448 100%);
+      padding: clamp(80px, 12vh, 140px) 0;
+      position: relative;
+      overflow: hidden;
+      z-index: 10;
+    }
+
+    /* Subtle ambient glow behind the droplet */
+    .science-section::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: 15%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(0, 165, 255, 0.08) 0%, transparent 70%);
+      transform: translate(50%, -50%);
+      pointer-events: none;
+      filter: blur(40px);
+    }
+
+    .science-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(40px, 6vw, 100px);
+      align-items: center;
+    }
+
+    /* Left column — text */
+    .science-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .science-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #00A5FF;
+      margin-bottom: var(--sp-6);
+    }
+
+    .science-label::before {
+      content: '';
+      width: 32px;
+      height: 2px;
+      background: #00A5FF;
+      border-radius: 2px;
+    }
+
+    .science-heading {
+      font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: var(--sp-4);
+    }
+
+    .science-heading span {
+      color: #00A5FF;
+    }
+
+    .science-sub {
+      font-size: 1.05rem;
+      color: rgba(255, 255, 255, 0.55);
+      line-height: 1.7;
+      margin-bottom: clamp(30px, 5vh, 50px);
+      max-width: 480px;
+    }
+
+    /* Fact cards */
+    .science-facts {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .science-fact {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px 24px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 16px;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.4s ease, border-color 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .science-fact:hover {
+      background: rgba(0, 165, 255, 0.06);
+      border-color: rgba(0, 165, 255, 0.15);
+      transform: translateX(8px);
+    }
+
+    /* Cyan accent bar on left */
+    .science-fact::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 20%;
+      height: 60%;
+      width: 3px;
+      background: linear-gradient(180deg, #00A5FF, rgba(0, 165, 255, 0.2));
+      border-radius: 3px;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .science-fact:hover::before { opacity: 1; }
+
+    .science-fact-icon {
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      border-radius: 12px;
+      background: rgba(0, 165, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: inset 0 0 0 1px rgba(0, 165, 255, 0.12);
+    }
+
+    .science-fact-icon svg {
+      width: 22px;
+      height: 22px;
+      stroke: #00A5FF;
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .science-fact-text h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+
+    .science-fact-text p {
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.45);
+      line-height: 1.5;
+    }
+
+    /* Right column — Droplet visual */
+    .science-visual {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 420px;
+      z-index: 1;
+    }
+
+    .science-droplet-wrap {
+      position: relative;
+      width: clamp(260px, 28vw, 380px);
+      height: clamp(340px, 36vw, 500px);
+    }
+
+    .science-droplet-svg {
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 0 40px rgba(0, 165, 255, 0.15));
+    }
+
+    /* Ripple rings around the droplet */
+    .science-ripple {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      border: 1px solid rgba(0, 165, 255, 0.12);
+      border-radius: 50%;
+      transform: translate(-50%, -50%) scale(0.7);
+      animation: ripple-expand 4s ease-out infinite;
+    }
+    .science-ripple:nth-child(2) { animation-delay: 1.3s; }
+    .science-ripple:nth-child(3) { animation-delay: 2.6s; }
+
+    @keyframes ripple-expand {
+      0%   { transform: translate(-50%, -50%) scale(0.7); opacity: 0.6; }
+      100% { transform: translate(-50%, -50%) scale(1.6); opacity: 0; }
+    }
+
+    /* Floating particles */
+    .science-particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: #00A5FF;
+      border-radius: 50%;
+      opacity: 0.3;
+      animation: particle-float 6s ease-in-out infinite alternate;
+    }
+    .science-particle:nth-child(1) { top: 15%; left: 20%; animation-duration: 5s; }
+    .science-particle:nth-child(2) { top: 70%; left: 10%; animation-duration: 7s; animation-delay: 1s; }
+    .science-particle:nth-child(3) { top: 25%; right: 15%; animation-duration: 6s; animation-delay: 2s; }
+    .science-particle:nth-child(4) { bottom: 20%; right: 25%; animation-duration: 8s; animation-delay: 0.5s; }
+    .science-particle:nth-child(5) { top: 50%; left: 5%; animation-duration: 5.5s; animation-delay: 1.5s; width: 3px; height: 3px; }
+    .science-particle:nth-child(6) { top: 80%; right: 8%; animation-duration: 7.5s; animation-delay: 3s; width: 5px; height: 5px; opacity: 0.15; }
+
+    @keyframes particle-float {
+      0%   { transform: translateY(0) translateX(0); }
+      100% { transform: translateY(-20px) translateX(10px); }
+    }
+
+    /* Stats row below the droplet */
+    .science-stats {
+      display: flex;
+      justify-content: center;
+      gap: clamp(24px, 4vw, 48px);
+      margin-top: var(--sp-8);
+    }
+
+    .science-stat {
+      text-align: center;
+    }
+
+    .science-stat-number {
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 700;
+      color: #00A5FF;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .science-stat-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(255, 255, 255, 0.35);
+      font-weight: 500;
+    }
+
+    @media (max-width: 860px) {
+      .science-inner { grid-template-columns: 1fr; text-align: center; }
+      .science-content { order: 1; }
+      .science-visual { order: 0; min-height: 300px; }
+      .science-sub { margin-inline: auto; }
+      .science-label { justify-content: center; }
+      .science-fact { text-align: left; }
+      .science-fact:hover { transform: translateY(-4px); }
+    }
+
+    /* ── Progress bar ─────────────────────────────────────────── */
+    .products-progress {
+      max-width: 200px;
+      margin: 0 auto;
+      height: 3px;
+      background: rgba(11, 45, 94, 0.08);
+      border-radius: 3px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .products-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #00A5FF, #0b2d5e);
+      border-radius: 3px;
+      will-change: width;
+    }
+
+    /* ── Responsive ───────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .hero {
+        min-height: auto;
+        padding-bottom: var(--sp-12);
+      }
+
+      .hero__inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding-block: var(--sp-12) var(--sp-16);
+        gap: var(--sp-8);
+      }
+
+      .hero__content {
+        align-items: center;
+      }
+
+      .hero__subtext {
+        margin-inline: auto;
+      }
+
+      .hero__cta-wrap {
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .hero__badges {
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .hero__image {
+        min-height: 340px;
+      }
+
+      .hero__product-card {
+        width: 260px;
+        height: 350px;
+      }
+
+      .hero__ripples {
+        right: 50%;
+      }
+
+      .hero__heading {
+        font-size: clamp(2.1rem, 8vw, 3.2rem);
+      }
+
+      .hero__scroll-hint {
+        display: none;
+      }
+
+      .hero__cursor-glow {
+        display: none;
+      }
+
+      .hero__canvas {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================================================
+       STICKY GROUP: ANNOUNCEMENT BAR + NAVIGATION
+       ============================================================ -->
+  <div class="site-header-group">
+
+    <!-- SECTION 0 — ANNOUNCEMENT BAR -->
+    <div class="announcement-bar" role="region" aria-label="Promotions">
+      <div class="announcement-bar__inner">
+        <button class="announcement-bar__arrow" aria-label="Previous message">‹</button>
+        <span>Free shipping on orders over £50 &nbsp;·&nbsp; 30-day money-back guarantee</span>
+        <button class="announcement-bar__arrow" aria-label="Next message">›</button>
+      </div>
+    </div>
+
+    <!-- SECTION 1 — NAVIGATION -->
+    <header class="site-header" role="banner">
+      <div class="site-header__inner">
+
+        <!-- Logo -->
+        <a href="/" class="site-logo" aria-label="PureDrop — Home">
+          Pure<strong>Drop</strong>.
+        </a>
+
+        <!-- ══════════════════════════════════════════════════
+             PRIMARY NAV — 3 mega-menus + 1 simple link
+             (mirrors Showerlabs: Produkter / informação / Suporte / Acompanhe)
+             ══════════════════════════════════════════════════ -->
+        <nav class="site-nav" aria-label="Primary navigation">
+
+          <!-- ┌─────────────────────────────────────────────┐
+               │  1. PRODUCTS  (mega-menu)                   │
+               └─────────────────────────────────────────────┘ -->
+          <div class="site-nav__item">
+            <a href="#" class="site-nav__link" aria-haspopup="true" onclick="event.preventDefault()">
+              Products
+              <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true">
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </a>
+
+            <div class="mega-menu" role="region" aria-label="Products menu">
+              <div class="mega-menu__inner">
+
+                <div class="mega-menu__links">
+                  <a href="/products/the-carafe" class="mega-menu__link">The Carafe</a>
+                  <a href="/products/home-unit" class="mega-menu__link">Home Purifier</a>
+                  <a href="/products/tap-filter" class="mega-menu__link">Tap Filter</a>
+                  <a href="/products/shower-filter" class="mega-menu__link">Shower Filter</a>
+                </div>
+
+                <div class="mega-menu__cards">
+                  <a href="/products/the-carafe" class="mega-menu__card">
+                    <div class="mega-menu__card-img">
+                      <svg class="mega-menu__card-img-placeholder" viewBox="0 0 48 48" aria-hidden="true">
+                        <rect x="10" y="4" width="28" height="40" rx="4" />
+                        <line x1="17" y1="36" x2="31" y2="36" />
+                      </svg>
+                    </div>
+                    <p class="mega-menu__card-title">The Carafe</p>
+                    <p class="mega-menu__card-desc">Our patented premium carafe that purifies and remineralises your
+                      drinking water.</p>
+                  </a>
+
+                  <a href="/products/home-unit" class="mega-menu__card">
+                    <div class="mega-menu__card-img">
+                      <svg class="mega-menu__card-img-placeholder" viewBox="0 0 48 48" aria-hidden="true">
+                        <rect x="8" y="8" width="32" height="32" rx="4" />
+                        <circle cx="24" cy="24" r="6" />
+                      </svg>
+                    </div>
+                    <p class="mega-menu__card-title">Home Purifier</p>
+                    <p class="mega-menu__card-desc">Whole-home water purification unit for clean, safe water from every
+                      tap.</p>
+                  </a>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- ┌─────────────────────────────────────────────┐
+               │  2. INFORMATION  (mega-menu)                │
+               └─────────────────────────────────────────────┘ -->
+          <div class="site-nav__item">
+            <a href="#" class="site-nav__link" aria-haspopup="true" onclick="event.preventDefault()">
+              Information
+              <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true">
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </a>
+
+            <div class="mega-menu" role="region" aria-label="Information menu">
+              <div class="mega-menu__inner">
+
+                <div class="mega-menu__links">
+                  <a href="/pages/about" class="mega-menu__link">About Us</a>
+                  <a href="/pages/science" class="mega-menu__link">Science</a>
+                  <a href="/pages/water-quality" class="mega-menu__link">Water Quality</a>
+                  <a href="/pages/installation" class="mega-menu__link">Installation</a>
+                </div>
+
+                <div class="mega-menu__cards">
+                  <a href="/pages/science" class="mega-menu__card">
+                    <div class="mega-menu__card-img">
+                      <svg class="mega-menu__card-img-placeholder" viewBox="0 0 48 48" aria-hidden="true">
+                        <circle cx="24" cy="24" r="18" />
+                        <path d="M16 24 L22 30 L32 18" />
+                      </svg>
+                    </div>
+                    <p class="mega-menu__card-title">The Science</p>
+                    <p class="mega-menu__card-desc">The science behind the PureDrop filter, which effectively purifies
+                      your water.</p>
+                  </a>
+
+                  <a href="/pages/water-quality" class="mega-menu__card">
+                    <div class="mega-menu__card-img">
+                      <svg class="mega-menu__card-img-placeholder" viewBox="0 0 48 48" aria-hidden="true">
+                        <path d="M8 8 h32 v32 h-32z" />
+                        <circle cx="24" cy="24" r="8" />
+                      </svg>
+                    </div>
+                    <p class="mega-menu__card-title">Water Quality</p>
+                    <p class="mega-menu__card-desc">Check the water quality in your area with our interactive map.</p>
+                  </a>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- ┌─────────────────────────────────────────────┐
+               │  3. SUPPORT  (mega-menu)                    │
+               └─────────────────────────────────────────────┘ -->
+          <div class="site-nav__item">
+            <a href="#" class="site-nav__link" aria-haspopup="true" onclick="event.preventDefault()">
+              Support
+              <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true">
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </a>
+
+            <div class="mega-menu" role="region" aria-label="Support menu">
+              <div class="mega-menu__inner">
+
+                <div class="mega-menu__links">
+                  <a href="/pages/contact" class="mega-menu__link">Contact Us</a>
+                  <a href="/pages/returns" class="mega-menu__link">Returns</a>
+                  <a href="/pages/collaborations" class="mega-menu__link">Collaborations</a>
+                  <a href="/account/subscription" class="mega-menu__link">My Subscription</a>
+                </div>
+
+                <div class="mega-menu__cards">
+                  <a href="/pages/contact" class="mega-menu__card">
+                    <div class="mega-menu__card-img">
+                      <svg class="mega-menu__card-img-placeholder" viewBox="0 0 48 48" aria-hidden="true">
+                        <rect x="6" y="12" width="36" height="24" rx="3" />
+                        <polyline points="6 12 24 28 42 12" />
+                      </svg>
+                    </div>
+                    <p class="mega-menu__card-title">Customer Service</p>
+                    <p class="mega-menu__card-desc">Our customer service team is ready to answer all your questions.</p>
+                  </a>
+
+                  <a href="/account/subscription" class="mega-menu__card">
+                    <div class="mega-menu__card-img">
+                      <svg class="mega-menu__card-img-placeholder" viewBox="0 0 48 48" aria-hidden="true">
+                        <path d="M24 4 L24 44" />
+                        <path d="M12 16 L24 4 L36 16" />
+                        <rect x="8" y="30" width="32" height="14" rx="3" />
+                      </svg>
+                    </div>
+                    <p class="mega-menu__card-title">My Subscription</p>
+                    <p class="mega-menu__card-desc">Get an overview of your filter subscription and manage deliveries.
+                    </p>
+                  </a>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- ┌─────────────────────────────────────────────┐
+               │  4. TRACK ORDER  (simple link, no dropdown) │
+               └─────────────────────────────────────────────┘ -->
+          <div class="site-nav__item">
+            <a href="/apps/track-order" class="site-nav__link">Track my order</a>
+          </div>
+
+        </nav>
+
+        <!-- Right icons: Search + Account + Cart -->
+        <div class="site-header__icons">
+
+          <a href="/account" class="header-icon" aria-label="My account">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+          </a>
+
+          <button class="header-icon" aria-label="Cart — 0 items">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <path d="M16 10a4 4 0 0 1-8 0" />
+            </svg>
+            <span class="header-icon__badge" aria-hidden="true">0</span>
+          </button>
+
+        </div>
+
+        <!-- Mobile hamburger -->
+        <button class="site-header__hamburger" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+
+      </div>
+    </header>
+
+  </div><!-- /.site-header-group -->
+
+  <!-- ============================================================
+       SECTION 2 — HERO (Premium Dark Liquid Dynamics)
+       ============================================================ -->
+  <section class="hero" aria-label="Hero">
+
+    <!-- Scroll-driven Background Video -->
+    <video class="hero__bg-video" src="assets/hero-video-scrub.mp4" playsinline muted preload="auto"></video>
+    <div class="hero__video-fade" aria-hidden="true"></div>
+    <div class="hero__bottom-gradient" aria-hidden="true"></div>
+    <div class="hero__inner">
+
+      <!-- Left: cinematic text reveal -->
+      <div class="hero__content">
+
+        <h1 class="hero__heading">
+          <span class="hero__heading-line"><span>The carafe that</span></span>
+          <span class="hero__heading-line"><span><span class="hero__heading-accent">purifies</span> your
+              water.</span></span>
+        </h1>
+
+        <p class="hero__subtext">
+          Advanced fluid dynamics meets premium purification. Removes microplastics, chlorine, and restores essential
+          minerals.
+        </p>
+
+        <!-- CTA: liquid wave fill button + secondary link -->
+        <div class="hero__cta-wrap">
+          <a href="/products/the-carafe" class="hero__cta">
+            <span class="hero__cta-wave" aria-hidden="true"></span>
+            Explore the Carafe
+            <svg class="hero__cta-arrow" viewBox="0 0 24 24" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </a>
+          <a href="/pages/science" class="hero__cta-secondary">
+            How it works
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </a>
+        </div>
+
+        <!-- Apple-Style Specs -->
+        <div class="hero__specs">
+          <span class="hero__spec">
+            <svg width="15" height="15" fill="none" stroke="#00A5FF" stroke-width="2.5" viewBox="0 0 24 24">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+            99.99% Purity
+          </span>
+          <span class="hero__spec-divider"></span>
+          <span class="hero__spec">
+            <svg width="15" height="15" fill="none" stroke="#00A5FF" stroke-width="2.5" viewBox="0 0 24 24">
+              <path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8m-4-6l-4-4-4 4m4-4v13" />
+            </svg>
+            BPA-Free
+          </span>
+          <span class="hero__spec-divider"></span>
+          <span class="hero__spec">
+            <svg width="15" height="15" fill="none" stroke="#00A5FF" stroke-width="2.5" viewBox="0 0 24 24">
+              <path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z" />
+              <path d="M12 6v6l4 2" />
+            </svg>
+            Award Winner
+          </span>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Rotating Scroll Indicator -->
+    <div class="hero__scroll-indicator" aria-hidden="true">
+      <svg class="hero__scroll-text-svg" viewBox="0 0 100 100">
+        <path id="circle-path" d="M 50, 50 m -40, 0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" fill="transparent" />
+        <text>
+          <textPath href="#circle-path" startOffset="0%" textLength="240">
+            SCROLL TO EXPLORE • PUREDROP •
+          </textPath>
+        </text>
+      </svg>
+      <div class="hero__scroll-arrow">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        </svg>
+      </div>
+    </div>
+
+  </section>
+  <!-- ============================================================
+       SECTION 3 — PRODUCTS CAROUSEL
+       ============================================================ -->
+  <section class="products-section" id="products">
+    <div class="products-ambient-blob"></div>
+
+    <!-- Organic Wave Divider to blend with Hero Video -->
+    <div class="products-top-wave" aria-hidden="true">
+      <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path
+          d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118.08,130.83,119.56,189.56,98.63,243.68,79.52,284.14,64.44,321.39,56.44Z">
+        </path>
+      </svg>
+    </div>
+
+    <div class="products-bg-text" aria-hidden="true">PUREDROP</div>
+
+    <div class="products-header">
+      <div class="products-title-group">
+        <h2 class="products-title">Filtration For Every Drop</h2>
+        <p class="products-subtitle">Discover our premium range of purification solutions engineered to elevate your
+          daily water experience, from the kitchen to the shower.</p>
+      </div>
+    </div>
+
+    <div class="products-carousel-wrap">
+      <div class="products-track" id="prod-track">
+
+        <!-- Product 1 -->
+        <article class="product-card">
+          <div class="product-img-wrap">
+            <svg viewBox="0 0 24 24">
+              <path d="M4 7v10c0 2 1.5 3 3.5 3h9c2 0 3.5-1 3.5-3V7M8 3h8M12 3v4" />
+            </svg>
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">The Carafe</h3>
+            <p class="product-desc">Beautiful glass pitcher with 4-stage micro-filtration for the dining table. Elevate
+              every meal.</p>
+            <div class="product-btm">
+              <span class="product-price">£85.00</span>
+              <a href="#" class="product-btn" aria-label="Add The Carafe to cart">View</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Product 2 -->
+        <article class="product-card">
+          <div class="product-img-wrap">
+            <svg viewBox="0 0 24 24">
+              <path d="M5 3v18M19 3v18M5 8h14M5 16h14M12 8v8" />
+            </svg>
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">Home Purifier</h3>
+            <p class="product-desc">Countertop reverse osmosis system. The ultimate zero-installation pure water
+              dispenser.</p>
+            <div class="product-btm">
+              <span class="product-price">£299.00</span>
+              <a href="#" class="product-btn" aria-label="Add Home Purifier to cart">View</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Product 3 -->
+        <article class="product-card">
+          <div class="product-img-wrap">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 3v4M8 7h8a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2zM12 13v8M9 21h6" />
+            </svg>
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">Tap Filter</h3>
+            <p class="product-desc">Sleek faucet attachment that instantly transforms tap water into pure alkaline
+              drinking water.</p>
+            <div class="product-btm">
+              <span class="product-price">£65.00</span>
+              <a href="#" class="product-btn" aria-label="Add Tap Filter to cart">View</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Product 4 -->
+        <article class="product-card">
+          <div class="product-img-wrap">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12 2v6M9 8h6a3 3 0 0 1 3 3v2a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3v-2a3 3 0 0 1 3-3zM8 19v-3M12 21v-5M16 19v-3" />
+            </svg>
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">Shower Filter</h3>
+            <p class="product-desc">Removes chlorine and heavy metals for healthier hair and softer skin. Easy inline
+              installation.</p>
+            <div class="product-btm">
+              <span class="product-price">£95.00</span>
+              <a href="#" class="product-btn" aria-label="Add Shower Filter to cart">View</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+
+    <!-- Scroll progress -->
+    <div class="products-progress" style="margin-bottom: var(--sp-10);">
+      <div class="products-progress-fill" id="prod-progress"></div>
+    </div>
+  </section>
+  <!-- ============================================================
+       SECTION 4 — TRUST ICONS
+       ============================================================ -->
+  <section class="trust-icons">
+    <div class="container">
+      <div class="trust-grid">
+        
+        <div class="trust-card">
+          <div class="trust-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M10 3h4v4l5 12H5l5-12z" fill="rgba(0,165,255,0.1)"/>
+            </svg>
+          </div>
+          <p class="trust-text">Lab Tested</p>
+        </div>
+
+        <div class="trust-card">
+          <div class="trust-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <polyline points="9 12 11 14 15 10"/>
+            </svg>
+          </div>
+          <p class="trust-text">Patented Technology</p>
+        </div>
+
+        <div class="trust-card">
+          <div class="trust-icon">
+            <svg viewBox="0 0 24 24">
+              <rect x="1" y="3" width="15" height="13"/>
+              <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+              <circle cx="5.5" cy="18.5" r="2.5"/>
+              <circle cx="18.5" cy="18.5" r="2.5"/>
+            </svg>
+          </div>
+          <p class="trust-text">Free Shipping</p>
+        </div>
+
+        <div class="trust-card">
+          <div class="trust-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.3"/>
+            </svg>
+          </div>
+          <p class="trust-text">30-Day Guarantee</p>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 5 — SCIENCE / WHY FILTER?
+       ============================================================ -->
+  <section class="science-section" id="science">
+    <div class="container science-inner">
+
+      <!-- Left: Text & Facts -->
+      <div class="science-content">
+        <p class="science-label">The Science</p>
+        <h2 class="science-heading">What's really <span>in your water?</span></h2>
+        <p class="science-sub">Tap water travels through ageing pipes and picks up invisible contaminants before it reaches your glass. PureDrop's multi-stage filtration eliminates what you can't see.</p>
+
+        <div class="science-facts">
+          <div class="science-fact">
+            <div class="science-fact-icon">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="7" stroke-dasharray="3 3"/><circle cx="12" cy="12" r="10" stroke-dasharray="2 4"/></svg>
+            </div>
+            <div class="science-fact-text">
+              <h4>Microplastics</h4>
+              <p>Studies show tap water contains up to 4,000 micro-particles per litre. PureDrop removes 99.8% of them.</p>
+            </div>
+          </div>
+
+          <div class="science-fact">
+            <div class="science-fact-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10"/><path d="M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+            </div>
+            <div class="science-fact-text">
+              <h4>Chlorine & Chemicals</h4>
+              <p>Residual disinfectants alter taste and can irritate skin. Our activated carbon stage strips them entirely.</p>
+            </div>
+          </div>
+
+          <div class="science-fact">
+            <div class="science-fact-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4.5 2 7L12 16l-6.5 4.5 2-7L2 9h7z"/></svg>
+            </div>
+            <div class="science-fact-text">
+              <h4>Essential Minerals Restored</h4>
+              <p>Unlike reverse osmosis, PureDrop's final stage re-mineralises with calcium and magnesium for optimal taste.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Droplet Visual -->
+      <div class="science-visual">
+        <!-- Floating particles -->
+        <div class="science-particle"></div>
+        <div class="science-particle"></div>
+        <div class="science-particle"></div>
+        <div class="science-particle"></div>
+        <div class="science-particle"></div>
+        <div class="science-particle"></div>
+
+        <div class="science-droplet-wrap">
+          <!-- Ripple rings -->
+          <div class="science-ripple"></div>
+          <div class="science-ripple"></div>
+          <div class="science-ripple"></div>
+
+          <!-- Droplet SVG -->
+          <svg class="science-droplet-svg" viewBox="0 0 200 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="dropGrad" x1="100" y1="0" x2="100" y2="260" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#00A5FF" stop-opacity="0.6"/>
+                <stop offset="100%" stop-color="#0B2D5E" stop-opacity="0.8"/>
+              </linearGradient>
+              <linearGradient id="dropStroke" x1="100" y1="0" x2="100" y2="260" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#00A5FF" stop-opacity="0.5"/>
+                <stop offset="100%" stop-color="#00A5FF" stop-opacity="0.1"/>
+              </linearGradient>
+            </defs>
+            <!-- Drop shape -->
+            <path d="M100 10 C100 10, 30 120, 30 170 C30 210, 60 250, 100 250 C140 250, 170 210, 170 170 C170 120, 100 10, 100 10Z" fill="url(#dropGrad)" stroke="url(#dropStroke)" stroke-width="1.5"/>
+            <!-- Inner highlight -->
+            <ellipse cx="80" cy="140" rx="25" ry="40" fill="rgba(255,255,255,0.06)" transform="rotate(-15 80 140)"/>
+            <!-- Tiny sparkle -->
+            <circle cx="78" cy="110" r="3" fill="rgba(255,255,255,0.25)"/>
+          </svg>
+        </div>
+
+        <!-- Stats -->
+        <div class="science-stats">
+          <div class="science-stat">
+            <div class="science-stat-number">99.8%</div>
+            <div class="science-stat-label">Purity Rate</div>
+          </div>
+          <div class="science-stat">
+            <div class="science-stat-number">4+</div>
+            <div class="science-stat-label">Filter Stages</div>
+          </div>
+          <div class="science-stat">
+            <div class="science-stat-number">80+</div>
+            <div class="science-stat-label">Contaminants</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <!-- IMPACT STAT — coming next -->
+  <!-- FAQ — coming next -->
+  <!-- FOOTER — coming next -->
+
+  <!-- ============================================================
+       ANIMATION ENGINE — Awwwards-level hero experience
+       Canvas particles · Cinematic text reveal · 3D parallax ·
+       Magnetic cursor · Clip-path product · Scroll fade
+       ============================================================ -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+
+      /* ═══════════════════════════════════════════════════════════
+         1. WAIT FOR GSAP (deferred loading)
+         ═══════════════════════════════════════════════════════════ */
+      function initGSAP() {
+        if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+          return setTimeout(initGSAP, 50);
+        }
+        gsap.registerPlugin(ScrollTrigger);
+
+        /* ─── 1.5 SCROLL-DRIVEN VIDEO (no pin — hero scrolls naturally) ── */
+        var heroVideo = document.querySelector('.hero__bg-video');
+        var videoFade = document.querySelector('.hero__video-fade');
+
+        if (heroVideo) {
+          var initVideoScroll = function () {
+            if (!heroVideo.duration) return;
+
+            // Pin the hero and scrub the entire video duration through 1400px of scroll.
+            // scrub: 0.4 keeps video nearly 1:1 with scroll with minimal lag.
+            var heroPin = gsap.timeline({
+              scrollTrigger: {
+                trigger: '.hero',
+                start: 'top top',
+                end: '+=1400',
+                pin: true,
+                anticipatePin: 1,
+                scrub: 0.4
+              }
+            });
+
+            // Scrub video 0 → end across the full 1400px
+            heroPin.to(heroVideo, {
+              currentTime: heroVideo.duration - 0.05,
+              ease: 'none',
+              duration: 1   // duration is relative inside the timeline
+            }, 0);
+
+            // Fade lateral gradient in first 50% of pin
+            if (videoFade) {
+              heroPin.to(videoFade, {
+                opacity: 0,
+                ease: 'none',
+                duration: 0.5
+              }, 0);
+            }
+
+            // Content fades out in first 40% of pin
+            heroPin.to('.hero__content', {
+              opacity: 0,
+              y: -60,
+              filter: 'blur(6px)',
+              ease: 'power1.in',
+              duration: 0.4
+            }, 0);
+
+            // Scroll indicator: starts fading after 12% of pin travel (not at 0),
+            // so at progress=0 heroPin doesn't touch it — heroTl keeps it at opacity:1.
+            // fromTo ensures that when scrolling back, it fully restores to 1.
+            heroPin.fromTo('.hero__scroll-indicator',
+              { opacity: 1 },
+              { opacity: 0, ease: 'power1.in', duration: 0.18 },
+              0.12
+            );
+          };
+
+          if (heroVideo.readyState >= 1) {
+            initVideoScroll();
+          } else {
+            heroVideo.addEventListener('loadedmetadata', initVideoScroll);
+          }
+        }
+
+        /* ─── 2. CINEMATIC HERO TIMELINE ──────────────────────── */
+        var heroTl = gsap.timeline({
+          defaults: { ease: 'expo.out' },
+          delay: 0.3
+        });
+
+        // Heading lines: mask reveal from bottom (cinematic)
+        heroTl
+          .to('.hero__heading', { opacity: 1, duration: 0.01 })
+          .to('.hero__heading-line span', {
+            y: '0%',
+            duration: 1.2,
+            stagger: 0.12,
+            ease: 'expo.out'
+          }, '-=0.3')
+
+          // Subtext
+          .to('.hero__subtext', {
+            opacity: 1,
+            y: 0,
+            duration: 0.9,
+            ease: 'power3.out'
+          }, '-=0.7')
+
+          // CTA buttons
+          .to('.hero__cta-wrap', {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: 'power3.out'
+          }, '-=0.5')
+
+          // Specs fade in
+          .to('.hero__specs', {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: 'power3.out'
+          }, '-=0.5')
+
+          // Circular scroll indicator fade in
+          .to('.hero__scroll-indicator', {
+            opacity: 1,
+            duration: 1,
+            ease: 'power2.out'
+          }, '-=0.3');
+
+        // Background typography parallax (driven by the same scroll as the horizontal pin)
+        gsap.to('.products-bg-text', {
+          x: '-15%',
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '.products-section',
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 2
+          }
+        });
+
+        /* ─── SCROLL-DRIVEN HORIZONTAL PRODUCTS ──────────────────── */
+
+        var track = document.getElementById('prod-track');
+        var prodSection = document.querySelector('.products-section');
+
+        if (track && prodSection) {
+          var cards = track.querySelectorAll('.product-card');
+
+          // Amount to translate: full track width minus one viewport width
+          // (the symmetric padding makes this equal to (cards-1) * (cardW + gap))
+          function getScrollAmount() {
+            return -(track.scrollWidth - window.innerWidth);
+          }
+
+          // Build the horizontal tween (paused — ScrollTrigger drives it)
+          var hTween = gsap.to(track, {
+            x: getScrollAmount,
+            ease: 'none',
+            paused: true
+          });
+
+          // Pin products section; scrub the horizontal tween with scroll
+          ScrollTrigger.create({
+            trigger: prodSection,
+            start: 'top top',
+            end: function () { return '+=' + Math.abs(getScrollAmount()); },
+            pin: true,
+            anticipatePin: 1,
+            scrub: 1,
+            animation: hTween,
+            invalidateOnRefresh: true,
+            onUpdate: function (self) {
+              // Progress bar
+              var prog = document.getElementById('prod-progress');
+              if (prog) prog.style.width = (self.progress * 100) + '%';
+
+              // Active card highlight
+              var idx = Math.round(self.progress * (cards.length - 1));
+              cards.forEach(function (c, i) {
+                c.classList.toggle('active', i === idx);
+              });
+            }
+          });
+
+          // SAFE FADE ENTRY (Intersection Observer instead of competing ScrollTriggers)
+          var obsElements = document.querySelectorAll('.products-title-group > h2, .products-title-group > p, .product-card, .trust-card, .science-label, .science-heading, .science-sub, .science-fact, .science-droplet-wrap, .science-stat');
+          obsElements.forEach(function (el, i) {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(40px)';
+            el.style.transition = 'opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+            el.style.transitionDelay = (i * 0.1) + 's';
+          });
+
+          var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                // Only clear Y transform so we don't break the CSS active state scaling matrix
+                entry.target.style.transform = 'translateY(0)';
+                observer.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.1 });
+
+          obsElements.forEach(function (el) { observer.observe(el); });
+
+          /* ── TRUST SPOTLIGHT (Underwater Radar) ── */
+          var trustGrid = document.querySelector('.trust-grid');
+          var trustCards = document.querySelectorAll('.trust-card');
+
+          if (trustGrid) {
+            trustGrid.addEventListener('mousemove', function(e) {
+              trustCards.forEach(function(card) {
+                var rect = card.getBoundingClientRect();
+                // Cursor position relative to this card in %
+                var x = ((e.clientX - rect.left) / rect.width)  * 100;
+                var y = ((e.clientY - rect.top)  / rect.height) * 100;
+                card.style.setProperty('--mouse-x', x + '%');
+                card.style.setProperty('--mouse-y', y + '%');
+              });
+            });
+          }
+        }
+
+      }
+
+      initGSAP();
+    });
+  </script>
+
+</body>
+
+</html>

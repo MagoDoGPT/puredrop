@@ -1,0 +1,267 @@
+/* ── SECTION 6: BRAND STORY ──────────────────────────────── */
+.story-section {
+    background: var(--navy);
+    padding: clamp(60px, 8vh, 100px) 0 clamp(300px, 35vh, 400px);
+    position: relative;
+    color: var(--white);
+    z-index: 10;
+}
+
+/* ── Fluid Water Transition ──────────────────────────────── */
+.story-water-transition {
+    position: absolute;
+    top: -119px; /* Precisely sits above the section to bridge the gap */
+    left: 0;
+    width: 100%;
+    height: 120px;
+    z-index: 10;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.story-wave-svg {
+    width: 200%; /* Double width to allow perfect seamless looping */
+    height: 100%;
+    display: block;
+}
+
+.story-wave-path {
+    animation: wave-horizontal-flow linear infinite;
+    will-change: transform;
+}
+
+.story-wave-front {
+    animation-duration: 12s;
+}
+
+.story-wave-back {
+    animation-duration: 18s;
+    animation-direction: reverse;
+}
+
+@keyframes wave-horizontal-flow {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* ── Bottom Transition (Surfacing to Testimonials) ──────── */
+.story-bottom-transition {
+    position: absolute;
+    bottom: -1px; /* Align precisely with the bottom to prevent 1px gap */
+    left: 0;
+    width: 100%;
+    height: 120px;
+    z-index: 10;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+/* ── Editorial Parallax Layout ────────────────────────────── */
+.story-editorial-layout {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 80vh;
+    padding: clamp(60px, 10vh, 120px) 0;
+}
+
+/* ── Image Track (Left/Background) ────────────────────────── */
+.story-image-track {
+    width: 60%;
+    position: relative;
+    z-index: 1;
+}
+
+.story-image-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    max-height: 700px;
+    border-radius: 32px;
+    overflow: hidden;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+}
+
+.story-image-actual {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 2; /* Sits above placeholder */
+}
+
+.story-image-placeholder {
+    position: relative;
+    z-index: 1; /* Fallback if image fails to load */
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #0b1f3d, #061224);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.05);
+    font-size: clamp(2rem, 4vw, 4rem);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+/* ── Glass Content Card (Right/Foreground) ────────────────── */
+.story-content-glass {
+    position: absolute;
+    right: 0;
+    width: 55%;
+    top: 50%;
+    transform: translateY(-50%); /* Base position before GSAP */
+    z-index: 2;
+    background: rgba(11, 45, 94, 0.4);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 40px;
+    padding: clamp(40px, 6vw, 80px);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+    display: flex;
+    gap: 40px;
+}
+
+/* ── The "Water Flow" Timeline Track ──────────────────────── */
+.story-timeline-track {
+    width: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.story-timeline-fill {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(180deg, #00A5FF, #ffffff);
+    transform-origin: top;
+    /* transform: scaleY(0) is handled by GSAP */
+}
+
+/* ── Text Content ─────────────────────────────────────────── */
+.story-text-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.story-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #00A5FF;
+    margin-bottom: var(--sp-6);
+}
+
+.story-label::before {
+    content: '';
+    width: 32px;
+    height: 2px;
+    background: #00A5FF;
+    border-radius: 2px;
+}
+
+.story-heading {
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: var(--sp-6);
+    letter-spacing: -0.02em;
+    color: var(--white);
+}
+
+.story-heading span {
+    font-style: italic;
+    font-weight: 400;
+    background: linear-gradient(120deg, #ffffff 0%, #00A5FF 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.story-body {
+    font-size: clamp(1rem, 1.2vw, 1.1rem);
+    color: rgba(255, 255, 255, 0.65);
+    line-height: 1.7;
+    margin-bottom: var(--sp-5);
+}
+
+/* ── Footer Actions (Button) ────────────────────────────── */
+.story-footer-actions {
+    margin-top: var(--sp-6);
+    padding-top: var(--sp-6);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+
+.story-action-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--white);
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 14px 28px;
+    border-radius: 100px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.story-action-button:hover {
+    background: #00A5FF;
+    border-color: #00A5FF;
+    gap: 16px;
+    box-shadow: 0 10px 30px rgba(0, 165, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 1024px) {
+    .story-editorial-layout {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .story-image-track {
+        width: 100%;
+    }
+    
+    .story-content-glass {
+        position: relative;
+        width: 100%;
+        top: auto;
+        transform: translateY(-80px); /* Overlap slightly on mobile */
+        right: auto;
+    }
+}
+
+@media (max-width: 600px) {
+    .story-content-glass {
+        padding: 32px 24px;
+        gap: 20px;
+        border-radius: 24px;
+    }
+    .story-timeline-track {
+        display: none; /* Simplify on very small screens */
+    }
+}
