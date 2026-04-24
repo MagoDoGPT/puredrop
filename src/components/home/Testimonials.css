@@ -225,12 +225,20 @@
 
 /* ── Responsive ───────────────────────────────────────────── */
 @media (max-width: 1024px) {
+    .testimonials-section {
+        height: auto;
+        min-height: 0;
+        padding: clamp(60px, 10vh, 100px) 0;
+        overflow: visible;
+    }
+
     .test-deck-layout {
         flex-direction: column;
         justify-content: center;
         text-align: center;
+        gap: 40px;
     }
-    
+
     .test-header-side {
         width: 100%;
         align-items: center;
@@ -242,11 +250,36 @@
 
     .test-deck-side {
         width: 100%;
-        margin-top: 40px;
+        height: auto;
+        margin-top: 0;
+    }
+
+    .test-deck-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        height: auto;
+        max-width: 100%;
     }
 
     .test-deck-card {
-        padding: 40px 30px;
+        position: relative;
+        top: auto;
+        left: auto;
+        margin: 0;
+        height: auto;
+        transform: none !important;
+        opacity: 1 !important;
+        padding: 36px 28px;
+        border-radius: 28px;
+    }
+
+    .test-card-0,
+    .test-card-1,
+    .test-card-2,
+    .test-card-3 {
+        transform: none;
+        opacity: 1;
     }
 }
 

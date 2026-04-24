@@ -36,9 +36,11 @@ export default function Testimonials() {
   const sectionRef = useRef(null);
 
   useEffect(() => {
+    if (window.matchMedia('(max-width: 1024px)').matches) return;
+
     let ctx = gsap.context(() => {
       const cards = gsap.utils.toArray('.test-deck-card');
-      
+
       // The master timeline for the pinned card deck
       let tl = gsap.timeline({
         scrollTrigger: {

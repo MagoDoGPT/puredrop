@@ -1,10 +1,20 @@
 /* ── SECTION 6: BRAND STORY ──────────────────────────────── */
 .story-section {
     background: var(--navy);
-    padding: clamp(60px, 8vh, 100px) 0 clamp(300px, 35vh, 400px);
+    padding: clamp(60px, 8vh, 100px) 0 clamp(140px, 16vh, 200px);
     position: relative;
     color: var(--white);
     z-index: 10;
+}
+
+@media (max-width: 1024px) {
+    .story-section {
+        padding: clamp(60px, 8vh, 80px) 0 clamp(100px, 12vh, 140px);
+    }
+    .story-editorial-layout {
+        padding: clamp(40px, 6vh, 60px) 0;
+        min-height: 0;
+    }
 }
 
 /* ── Fluid Water Transition ──────────────────────────────── */
