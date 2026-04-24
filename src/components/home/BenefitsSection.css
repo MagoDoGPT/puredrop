@@ -1,11 +1,10 @@
-/* ── SECTION 5: THE SCIENCE (3D Z-AXIS TUNNEL) ──────────────────────── */
+/* ── SECTION 5: THE SCIENCE (scroll-reveal, no pin) ─────────────────── */
 .science-tunnel {
     position: relative;
     width: 100%;
-    height: 100vh; /* Pinned full screen */
-    overflow: hidden;
     background: linear-gradient(180deg, #ffffff 0%, #f0f7ff 100%);
     color: var(--color-navy);
+    overflow: hidden;
 }
 
 /* ── Immersive Ambient Background ─────────────────────────── */
@@ -14,6 +13,7 @@
     inset: 0;
     z-index: 0;
     overflow: hidden;
+    pointer-events: none;
     background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0) 0%, rgba(21, 101, 192, 0.05) 100%);
 }
 
@@ -21,64 +21,30 @@
     position: absolute;
     border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
     filter: blur(80px);
-    opacity: 0.6;
+    opacity: 0.55;
 }
 
-.sci-orb-1 { 
-    width: 80vw; height: 80vw; 
-    background: rgba(0, 165, 255, 0.15); 
-    top: -20%; left: -10%; 
+.sci-orb-1 {
+    width: 60vw; height: 60vw;
+    background: rgba(0, 165, 255, 0.15);
+    top: 5%; left: -10%;
 }
 
-.sci-orb-2 { 
-    width: 60vw; height: 60vw; 
-    background: rgba(21, 101, 192, 0.12); 
-    bottom: -10%; right: -10%; 
+.sci-orb-2 {
+    width: 50vw; height: 50vw;
+    background: rgba(21, 101, 192, 0.12);
+    bottom: 5%; right: -10%;
 }
 
-/* ── Flying Particles (Water Depth Effect) ────────────────── */
-.sci-particles {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-}
-
-.sci-particle {
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    background: #00A5FF;
-    border-radius: 50%;
-    top: 50%; 
-    left: 50%;
-    box-shadow: 0 0 10px rgba(0, 165, 255, 0.5);
-    animation: particle-fly linear infinite;
-    will-change: transform, opacity;
-}
-
-@keyframes particle-fly {
-    0% { transform: translate(-50%, -50%) scale(0.1); opacity: 0; }
-    20% { opacity: 0.5; }
-    100% { transform: translate(var(--dx), var(--dy)) scale(8); opacity: 0; }
-}
-
-/* ── 3D Tunnel Container ──────────────────────────────────── */
-.sci-tunnel-container {
+/* ── Slides flow naturally ─────────────────────────────────── */
+.sci-slide {
     position: relative;
     z-index: 2;
     width: 100%;
-    height: 100%;
-}
-
-.sci-slide {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    /* transform is controlled purely by GSAP (xPercent, yPercent, scale) */
-    width: 100%;
     max-width: 1000px;
-    padding: 0 var(--sp-6);
+    margin: 0 auto;
+    padding: clamp(80px, 14vh, 140px) var(--sp-6);
+    min-height: 75vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -87,7 +53,12 @@
     will-change: transform, opacity, filter;
 }
 
-/* ── Slide 1: Intro ───────────────────────────────────────── */
+.sci-intro {
+    min-height: 80vh;
+    padding-top: clamp(100px, 18vh, 180px);
+}
+
+/* ── Intro ───────────────────────────────────────────────── */
 .sci-label {
     font-size: clamp(0.7rem, 2vw, 0.9rem);
     font-weight: 700;
@@ -98,11 +69,12 @@
 }
 
 .sci-heading {
-    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-size: clamp(3rem, 7vw, 6rem);
     font-weight: 700;
     color: var(--color-navy);
     line-height: 1.1;
     letter-spacing: -0.04em;
+    margin: 0;
 }
 
 .sci-heading span {
@@ -112,36 +84,34 @@
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    padding-right: 0.1em; /* Prevents the italic question mark from being clipped */
+    padding-right: 0.1em;
 }
 
-/* ── Slide 2-5: Facts ─────────────────────────────────────── */
+/* ── Facts ───────────────────────────────────────────────── */
 .sci-fact h3 {
-    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-size: clamp(2.25rem, 5vw, 4rem);
     font-weight: 700;
     color: var(--color-navy);
-    margin-bottom: var(--sp-6);
+    margin: 0 0 var(--sp-5) 0;
     letter-spacing: -0.03em;
 }
 
 .sci-fact p {
-    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    font-size: clamp(1.05rem, 1.5vw, 1.3rem);
     color: rgba(11, 45, 94, 0.7);
     line-height: 1.6;
-    max-width: 700px;
+    max-width: 640px;
     margin: 0 auto;
 }
 
 .sci-fact-icon {
-    width: clamp(80px, 15vw, 140px);
-    height: clamp(80px, 15vw, 140px);
-    margin-bottom: var(--sp-8);
+    width: clamp(80px, 12vw, 120px);
+    height: clamp(80px, 12vw, 120px);
+    margin-bottom: var(--sp-6);
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.4);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.8);
-    box-shadow: 0 20px 40px rgba(0, 165, 255, 0.1), inset 0 0 20px rgba(255, 255, 255, 0.6);
+    background: #ffffff;
+    border: 1px solid rgba(0, 165, 255, 0.15);
+    box-shadow: 0 20px 40px rgba(0, 165, 255, 0.08);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -155,7 +125,12 @@
     stroke-width: 1.5;
 }
 
-/* ── Slide 6: Outro Stats ─────────────────────────────────── */
+/* ── Outro Stats ─────────────────────────────────────────── */
+.sci-outro {
+    min-height: 70vh;
+    padding-bottom: clamp(100px, 16vh, 160px);
+}
+
 .sci-stats-row {
     display: flex;
     justify-content: center;
@@ -171,16 +146,17 @@
 }
 
 .sci-stat h2 {
-    font-size: clamp(4rem, 10vw, 8rem);
+    font-size: clamp(3.5rem, 8vw, 6.5rem);
     font-weight: 700;
     color: #00A5FF;
     line-height: 1;
     letter-spacing: -0.04em;
     text-shadow: 0 10px 30px rgba(0, 165, 255, 0.15);
+    margin: 0;
 }
 
 .sci-stat span {
-    font-size: clamp(0.7rem, 1.5vw, 1.1rem);
+    font-size: clamp(0.7rem, 1.5vw, 1.05rem);
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.15em;
@@ -188,8 +164,19 @@
 }
 
 @media (max-width: 768px) {
+    .sci-slide {
+        min-height: 55vh;
+        padding: clamp(60px, 10vh, 90px) var(--sp-5);
+    }
+    .sci-intro {
+        min-height: 60vh;
+        padding-top: clamp(80px, 12vh, 120px);
+    }
+    .sci-outro {
+        min-height: 60vh;
+    }
     .sci-stats-row {
         flex-direction: column;
-        gap: var(--sp-12);
+        gap: var(--sp-10);
     }
 }
