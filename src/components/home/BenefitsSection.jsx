@@ -99,6 +99,29 @@ export default function BenefitsSection() {
         <div className="sci-orb sci-orb-2"></div>
       </div>
 
+      <div className="sci-particles" aria-hidden="true">
+        {[...Array(20)].map((_, i) => {
+          const angle = (i / 20) * Math.PI * 2;
+          const distance = 1500;
+          const dx = Math.cos(angle) * distance + 'px';
+          const dy = Math.sin(angle) * distance + 'px';
+          const delay = (Math.random() * 4) + 's';
+          const dur = (Math.random() * 2 + 3) + 's';
+          return (
+            <div
+              key={i}
+              className="sci-particle"
+              style={{
+                '--dx': dx,
+                '--dy': dy,
+                animationDelay: delay,
+                animationDuration: dur
+              }}
+            ></div>
+          );
+        })}
+      </div>
+
       <div className="sci-slide sci-intro">
         <p className="sci-label">The Science</p>
         <h2 className="sci-heading">What's really<br /><span>in your water?</span></h2>
