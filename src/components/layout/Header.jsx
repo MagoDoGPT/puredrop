@@ -4,13 +4,17 @@ import { ShoppingCart, User, Menu, X, ChevronRight } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 import styles from './Header.module.css';
 
-const Logo = ({ dark }) => (
-  <span
-    className={`${styles.logoMark} ${dark ? styles.logoMarkDark : styles.logoMarkLight}`}
-    role="img"
-    aria-label="Puredrop"
-  />
-);
+const Logo = ({ dark }) => {
+  const logoUrl = `url(${import.meta.env.BASE_URL}logo.png)`;
+  return (
+    <span
+      className={`${styles.logoMark} ${dark ? styles.logoMarkDark : styles.logoMarkLight}`}
+      style={{ WebkitMaskImage: logoUrl, maskImage: logoUrl }}
+      role="img"
+      aria-label="Puredrop"
+    />
+  );
+};
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);

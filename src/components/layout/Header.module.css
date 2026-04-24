@@ -66,8 +66,10 @@
   display: block;
   width: 160px;
   height: 48px;
-  -webkit-mask: url('/logo.png') no-repeat left center;
-  mask: url('/logo.png') no-repeat left center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: left center;
+  mask-position: left center;
   -webkit-mask-size: contain;
   mask-size: contain;
   transition: background-color var(--transition-normal);

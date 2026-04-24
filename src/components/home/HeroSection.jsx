@@ -111,7 +111,7 @@ export default function HeroSection() {
       <video
         ref={videoRef}
         className="hero__bg-video"
-        src="/assets/hero-video-scrub.mp4"
+        src={`${import.meta.env.BASE_URL}assets/hero-video-scrub.mp4`}
         playsInline
         muted
         preload="auto"
