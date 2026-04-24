@@ -1,7 +1,7 @@
 /* ── SECTION 6: BRAND STORY ──────────────────────────────── */
 .story-section {
     background: var(--navy);
-    padding: clamp(60px, 8vh, 100px) 0 clamp(140px, 16vh, 200px);
+    padding: clamp(60px, 8vh, 100px) 0 clamp(300px, 35vh, 400px);
     position: relative;
     color: var(--white);
     z-index: 10;
