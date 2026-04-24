@@ -42,9 +42,13 @@ export default function App() {
     setIsConsentVisible(false);
   };
 
+  const routerBase = import.meta.env.BASE_URL.startsWith('http')
+    ? new URL(import.meta.env.BASE_URL).pathname
+    : import.meta.env.BASE_URL;
+
   return (
     <CartProvider>
-      <Router>
+      <Router basename={routerBase}>
         <div className="app-container">
           <Header />
 
