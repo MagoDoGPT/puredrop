@@ -36,17 +36,18 @@
     bottom: 5%; right: -10%;
 }
 
-/* ── Flying Particles (sticks to viewport while scrolling section) ── */
-.sci-particles {
-    position: sticky;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    margin-bottom: -100vh;
+/* ── Flying Particles (per-slide emitters, distributed throughout) ── */
+.slide-emitter {
+    position: absolute;
+    inset: 0;
     pointer-events: none;
+    overflow: visible;
+    z-index: 0;
+}
+
+.sci-slide > *:not(.slide-emitter) {
+    position: relative;
     z-index: 1;
-    overflow: hidden;
 }
 
 .sci-particle {

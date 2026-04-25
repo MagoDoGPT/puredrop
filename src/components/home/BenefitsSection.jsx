@@ -92,6 +92,31 @@ export default function BenefitsSection() {
     return () => ctx.revert();
   }, []);
 
+  const renderEmitter = (count = 6) => (
+    <div className="slide-emitter" aria-hidden="true">
+      {[...Array(count)].map((_, i) => {
+        const angle = (i / count) * Math.PI * 2 + Math.random() * 0.4;
+        const distance = 900 + Math.random() * 400;
+        const dx = Math.cos(angle) * distance + 'px';
+        const dy = Math.sin(angle) * distance + 'px';
+        const delay = (Math.random() * 4) + 's';
+        const dur = (Math.random() * 2 + 3) + 's';
+        return (
+          <div
+            key={i}
+            className="sci-particle"
+            style={{
+              '--dx': dx,
+              '--dy': dy,
+              animationDelay: delay,
+              animationDuration: dur
+            }}
+          ></div>
+        );
+      })}
+    </div>
+  );
+
   return (
     <section className="science-tunnel" id="science" ref={sectionRef}>
       <div className="sci-ambient-bg" aria-hidden="true">
@@ -99,36 +124,15 @@ export default function BenefitsSection() {
         <div className="sci-orb sci-orb-2"></div>
       </div>
 
-      <div className="sci-particles" aria-hidden="true">
-        {[...Array(20)].map((_, i) => {
-          const angle = (i / 20) * Math.PI * 2;
-          const distance = 1500;
-          const dx = Math.cos(angle) * distance + 'px';
-          const dy = Math.sin(angle) * distance + 'px';
-          const delay = (Math.random() * 4) + 's';
-          const dur = (Math.random() * 2 + 3) + 's';
-          return (
-            <div
-              key={i}
-              className="sci-particle"
-              style={{
-                '--dx': dx,
-                '--dy': dy,
-                animationDelay: delay,
-                animationDuration: dur
-              }}
-            ></div>
-          );
-        })}
-      </div>
-
       <div className="sci-slide sci-intro">
+        {renderEmitter(8)}
         <p className="sci-label">The Science</p>
         <h2 className="sci-heading">What's really<br /><span>in your water?</span></h2>
       </div>
 
       {FACTS.map((fact) => (
         <div className="sci-slide sci-fact" key={fact.key}>
+          {renderEmitter(7)}
           <div className="sci-fact-icon">{fact.icon}</div>
           <h3>{fact.title}</h3>
           <p>{fact.body}</p>
@@ -136,6 +140,7 @@ export default function BenefitsSection() {
       ))}
 
       <div className="sci-slide sci-outro">
+        {renderEmitter(8)}
         <div className="sci-stats-row">
           <div className="sci-stat"><h2>99.8%</h2><span>Purity Rate</span></div>
           <div className="sci-stat"><h2>4+</h2><span>Filter Stages</span></div>
