@@ -29,6 +29,18 @@
     animation: wave-horizontal-flow 20s linear infinite reverse;
 }
 
+@media (max-width: 768px) {
+    .social-section {
+        padding: clamp(160px, 22vh, 220px) 0 clamp(80px, 12vh, 120px);
+    }
+    .social-top-transition {
+        height: 80px;
+    }
+    .social-wave-svg {
+        width: 200%;
+    }
+}
+
 /* ── Header Area ────────────────────────────────────────── */
 .social-container {
     width: 100%;
