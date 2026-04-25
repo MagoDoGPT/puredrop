@@ -223,6 +223,12 @@
   gap: var(--sp-8);
 }
 
+.megaGrid4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--sp-6);
+}
+
 .infoCol h3 {
   margin-bottom: var(--sp-2);
   font-size: var(--text-lg);
@@ -275,6 +281,21 @@
   gap: var(--sp-4);
 }
 
+.mobileGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.mobileGroupLabel {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(11, 45, 94, 0.45);
+  margin: 0 0 var(--sp-1) 0;
+}
+
 .mobileLink {
   font-size: var(--text-xl);
   font-weight: 500;
@@ -284,7 +305,7 @@
 .mobileDivider {
   height: 1px;
   background-color: var(--color-gray-200);
-  margin: var(--sp-2) 0;
+  margin: var(--sp-3) 0;
 }
 
 @media (max-width: 768px) {

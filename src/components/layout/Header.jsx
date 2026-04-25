@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { ShoppingCart, User, Menu, X, ChevronRight } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 import styles from './Header.module.css';
@@ -21,19 +21,7 @@ const Header = () => {
   const [megaMenuOpen, setMegaMenuOpen] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
-  const navigate = useNavigate();
   const { count: cartCount } = useCart();
-
-  const handleStoryClick = (e) => {
-    e.preventDefault();
-    setMobileMenuOpen(false);
-    setMegaMenuOpen(null);
-    if (location.pathname === '/') {
-      document.getElementById('story')?.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      navigate('/#story');
-    }
-  };
 
   // Is this the homepage and we are at the very top?
   const isTransparent = location.pathname === '/' && !isScrolled && !megaMenuOpen && !mobileMenuOpen;
@@ -99,11 +87,11 @@ const Header = () => {
           >
             <Link to="/science">Learn</Link>
           </div>
-          <div className={styles.navItem}>
-             <a href="/#story" onClick={handleStoryClick}>Our Story</a>
-          </div>
-          <div className={styles.navItem}>
-            <Link to="/track-order">Track Order</Link>
+          <div
+            className={styles.navItem}
+            onMouseEnter={() => handleMouseEnter('support')}
+          >
+            <Link to="/faq">Support</Link>
           </div>
         </nav>
 
@@ -152,34 +140,81 @@ const Header = () => {
            <div className={styles.megaGrid3}>
               <div className={styles.infoCol}>
                 <h3>The Science</h3>
-                <p>Discover how our 4-stage filtration removes 99.9% of contaminants.</p>
+                <p>How our 4-stage filtration strips 99.9% of contaminants and restores the minerals your body actually needs.</p>
                 <Link to="/science" className={styles.textLink}>Read the science →</Link>
               </div>
               <div className={styles.infoCol}>
-                <h3>Blog & Guides</h3>
-                <p>Hydration tips, environmental impact, and product guides.</p>
-                <Link to="/blog" className={styles.textLink}>Explore articles →</Link>
+                <h3>Our Story</h3>
+                <p>Why we built Puredrop. The mission, the craft, and the new standard of hydration.</p>
+                <Link to="/about" className={styles.textLink}>Read our story →</Link>
               </div>
               <div className={styles.infoCol}>
-                <h3>Support</h3>
-                <p>Need help with your PureDrop product?</p>
-                <Link to="/faq" className={styles.textLink}>Visit FAQ →</Link>
+                <h3>Journal</h3>
+                <p>Hydration insights, product guides, and notes from the team — straight from Puredrop HQ.</p>
+                <Link to="/blog" className={styles.textLink}>Explore articles →</Link>
               </div>
            </div>
         </div>
       </div>
-      
-      {/* Mobile Menu Backdrop & Drawer - to be componentized later, keeping simple here */}
+
+      <div className={`${styles.megaMenu} ${megaMenuOpen === 'support' ? styles.open : ''}`}>
+        <div className={styles.megaContainer}>
+           <div className={styles.megaGrid4}>
+              <div className={styles.infoCol}>
+                <h3>Track Order</h3>
+                <p>See where your order is right now, any time after checkout.</p>
+                <Link to="/track-order" className={styles.textLink}>Track a parcel →</Link>
+              </div>
+              <div className={styles.infoCol}>
+                <h3>FAQ</h3>
+                <p>Answers to the most common questions about our products, filters and subscriptions.</p>
+                <Link to="/faq" className={styles.textLink}>Browse FAQs →</Link>
+              </div>
+              <div className={styles.infoCol}>
+                <h3>Contact Us</h3>
+                <p>Reach a real human — any question, any hour of the day.</p>
+                <Link to="/contact" className={styles.textLink}>Send a message →</Link>
+              </div>
+              <div className={styles.infoCol}>
+                <h3>Returns &amp; Refunds</h3>
+                <p>30-day easy returns. Simple, fair refund policy with no fine print.</p>
+                <Link to="/returns" className={styles.textLink}>Read the policy →</Link>
+              </div>
+           </div>
+        </div>
+      </div>
+
+      {/* Mobile drawer — grouped to match the 3 top categories */}
       <div className={`${styles.mobileDrawer} ${mobileMenuOpen ? styles.open : ''}`}>
          <div className={styles.mobileNav}>
-            <Link to="/shop" className={styles.mobileLink}>Shop All</Link>
-            <Link to="/science" className={styles.mobileLink}>The Science</Link>
-            <a href="/#story" className={styles.mobileLink} onClick={handleStoryClick}>Our Story</a>
-            <Link to="/track-order" className={styles.mobileLink}>Track Order</Link>
-            <Link to="/faq" className={styles.mobileLink}>FAQ</Link>
-            <Link to="/contact" className={styles.mobileLink}>Contact Support</Link>
+            <div className={styles.mobileGroup}>
+               <p className={styles.mobileGroupLabel}>Products</p>
+               <Link to="/shop" className={styles.mobileLink}>Shop All</Link>
+               <Link to="/gift-card" className={styles.mobileLink}>Gift Cards</Link>
+            </div>
+
             <div className={styles.mobileDivider}></div>
-             <Link to="/account" className={styles.mobileLink}>Login / Register</Link>
+
+            <div className={styles.mobileGroup}>
+               <p className={styles.mobileGroupLabel}>Learn</p>
+               <Link to="/science" className={styles.mobileLink}>The Science</Link>
+               <Link to="/about" className={styles.mobileLink}>Our Story</Link>
+               <Link to="/blog" className={styles.mobileLink}>Journal</Link>
+            </div>
+
+            <div className={styles.mobileDivider}></div>
+
+            <div className={styles.mobileGroup}>
+               <p className={styles.mobileGroupLabel}>Support</p>
+               <Link to="/track-order" className={styles.mobileLink}>Track Order</Link>
+               <Link to="/faq" className={styles.mobileLink}>FAQ</Link>
+               <Link to="/contact" className={styles.mobileLink}>Contact Us</Link>
+               <Link to="/returns" className={styles.mobileLink}>Returns &amp; Refunds</Link>
+            </div>
+
+            <div className={styles.mobileDivider}></div>
+
+            <Link to="/account" className={styles.mobileLink}>Login / Register</Link>
          </div>
       </div>
     </header>
