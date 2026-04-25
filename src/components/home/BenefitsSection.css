@@ -207,6 +207,7 @@
     }
     .sci-outro {
         min-height: 60vh;
+        padding-bottom: clamp(160px, 22vh, 220px);
     }
     .sci-stats-row {
         flex-direction: column;

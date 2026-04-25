@@ -36,10 +36,28 @@ export default function Testimonials() {
   const sectionRef = useRef(null);
 
   useEffect(() => {
-    if (window.matchMedia('(max-width: 1024px)').matches) return;
+    const isMobile = window.matchMedia('(max-width: 1024px)').matches;
 
     let ctx = gsap.context(() => {
       const cards = gsap.utils.toArray('.test-deck-card');
+
+      if (isMobile) {
+        // Mobile: simple fade-up reveal as each card enters the viewport
+        cards.forEach((card) => {
+          gsap.from(card, {
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 88%',
+              toggleActions: 'play none none reverse',
+            },
+            opacity: 0,
+            y: 28,
+            duration: 0.7,
+            ease: 'power2.out',
+          });
+        });
+        return;
+      }
 
       // The master timeline for the pinned card deck
       let tl = gsap.timeline({
