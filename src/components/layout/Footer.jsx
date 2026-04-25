@@ -84,6 +84,7 @@ const Footer = () => {
               <li><Link to="/products/the-carafe">The Carafe</Link></li>
               <li><Link to="/products/home-purifier">Home Purifier</Link></li>
               <li><Link to="/products/replacement-cartridges">Filters & Refills</Link></li>
+              <li><Link to="/gift-card">Gift Cards</Link></li>
               <li><Link to="/shop">Shop All</Link></li>
             </ul>
           </div>

@@ -1,0 +1,603 @@
+/* ── Gift Card Page ─────────────────────────────────────────── */
+.giftcard-page {
+    background: linear-gradient(180deg, #f7fbff 0%, #ffffff 60%, #f0f7ff 100%);
+    color: var(--color-navy);
+    padding: clamp(80px, 12vh, 140px) clamp(20px, 5vw, 80px) clamp(80px, 14vh, 160px);
+    min-height: 100vh;
+}
+
+.giftcard-hero {
+    max-width: 760px;
+    margin: 0 auto var(--sp-12) auto;
+    text-align: center;
+}
+
+.giftcard-eyebrow {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #00A5FF;
+    margin-bottom: var(--sp-4);
+}
+
+.giftcard-title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 700;
+    color: var(--color-navy);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin: 0 0 var(--sp-5) 0;
+}
+
+.giftcard-title span {
+    background: linear-gradient(120deg, #00A5FF 0%, #1565C0 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-style: italic;
+    font-weight: 500;
+    padding-right: 0.05em;
+}
+
+.giftcard-lede {
+    font-size: clamp(1rem, 1.4vw, 1.15rem);
+    color: rgba(11, 45, 94, 0.65);
+    line-height: 1.65;
+    max-width: 580px;
+    margin: 0 auto;
+}
+
+/* ── Layout ──────────────────────────────────────────────── */
+.giftcard-layout {
+    display: grid;
+    grid-template-columns: minmax(320px, 1fr) minmax(380px, 1.2fr);
+    gap: clamp(40px, 5vw, 80px);
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: start;
+}
+
+.giftcard-preview-wrap {
+    position: sticky;
+    top: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-5);
+}
+
+/* ── Card visual ─────────────────────────────────────────── */
+.giftcard-card {
+    position: relative;
+    aspect-ratio: 1.6 / 1;
+    width: 100%;
+    border-radius: 28px;
+    padding: clamp(24px, 4vw, 36px);
+    background:
+        radial-gradient(circle at 20% 0%, rgba(0, 165, 255, 0.45) 0%, transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(21, 101, 192, 0.4) 0%, transparent 60%),
+        linear-gradient(135deg, #0b2d5e 0%, #143b76 50%, #1565C0 100%);
+    color: #ffffff;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow:
+        0 30px 60px -20px rgba(11, 45, 94, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+}
+
+.giftcard-card__shine {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        transparent 0%,
+        transparent 40%,
+        rgba(255, 255, 255, 0.08) 50%,
+        transparent 60%,
+        transparent 100%
+    );
+    pointer-events: none;
+}
+
+.giftcard-card__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    z-index: 1;
+}
+
+.giftcard-card__brand {
+    font-size: clamp(1.15rem, 1.8vw, 1.35rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.giftcard-card__dot {
+    color: #00A5FF;
+}
+
+.giftcard-card__drop {
+    width: clamp(28px, 3.5vw, 36px);
+    height: clamp(28px, 3.5vw, 36px);
+    color: rgba(0, 165, 255, 0.85);
+    filter: drop-shadow(0 0 12px rgba(0, 165, 255, 0.5));
+}
+
+.giftcard-card__amount {
+    font-size: clamp(2.8rem, 7vw, 4.5rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    text-shadow: 0 4px 30px rgba(0, 165, 255, 0.3);
+    z-index: 1;
+}
+
+.giftcard-card__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 16px;
+    z-index: 1;
+}
+
+.giftcard-card__label span {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.giftcard-card__label small {
+    display: block;
+    margin-top: 4px;
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: 0.05em;
+}
+
+.giftcard-card__recipient {
+    text-align: right;
+    flex-shrink: 0;
+    min-width: 0;
+}
+
+.giftcard-card__recipient small {
+    display: block;
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-bottom: 4px;
+}
+
+.giftcard-card__recipient span {
+    display: block;
+    font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+    font-weight: 600;
+    color: #ffffff;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* ── Personal message preview ──────────────────────────── */
+.giftcard-message-preview {
+    display: flex;
+    gap: 12px;
+    padding: 18px 22px;
+    background: #ffffff;
+    border-radius: 20px;
+    border: 1px solid rgba(0, 165, 255, 0.12);
+    box-shadow: 0 10px 30px -15px rgba(11, 45, 94, 0.15);
+    color: var(--color-navy);
+}
+
+.giftcard-message-preview svg {
+    color: #00A5FF;
+    flex-shrink: 0;
+    margin-top: 4px;
+}
+
+.giftcard-message-preview p {
+    margin: 0 0 4px 0;
+    font-size: 0.95rem;
+    line-height: 1.55;
+    font-style: italic;
+    color: rgba(11, 45, 94, 0.85);
+}
+
+.giftcard-message-preview span {
+    font-size: 0.8rem;
+    color: rgba(11, 45, 94, 0.55);
+    font-weight: 600;
+}
+
+/* ── Form ────────────────────────────────────────────────── */
+.giftcard-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-8);
+}
+
+.giftcard-fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-4);
+}
+
+.giftcard-fieldset legend {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-navy);
+    letter-spacing: -0.01em;
+    margin-bottom: var(--sp-2);
+}
+
+.giftcard-optional {
+    color: rgba(11, 45, 94, 0.4);
+    font-weight: 400;
+    font-size: 0.85rem;
+}
+
+/* ── Presets ─────────────────────────────────────────────── */
+.giftcard-presets {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.giftcard-preset {
+    padding: 16px 8px;
+    background: #ffffff;
+    border: 1.5px solid rgba(11, 45, 94, 0.1);
+    border-radius: 14px;
+    color: var(--color-navy);
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.giftcard-preset:hover {
+    border-color: rgba(0, 165, 255, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px -8px rgba(0, 165, 255, 0.25);
+}
+
+.giftcard-preset.is-active {
+    background: var(--color-navy);
+    border-color: var(--color-navy);
+    color: #ffffff;
+    box-shadow: 0 8px 18px -8px rgba(11, 45, 94, 0.4);
+}
+
+.giftcard-custom {
+    margin-top: 8px;
+    padding: 16px 18px;
+    background: #ffffff;
+    border: 1.5px solid rgba(11, 45, 94, 0.08);
+    border-radius: 14px;
+    transition: border-color 0.2s ease;
+}
+
+.giftcard-custom.is-active {
+    border-color: rgba(0, 165, 255, 0.5);
+    background: rgba(0, 165, 255, 0.03);
+}
+
+.giftcard-custom label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: rgba(11, 45, 94, 0.6);
+    margin-bottom: 6px;
+}
+
+.giftcard-custom__input {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.4rem;
+}
+
+.giftcard-custom__input span {
+    font-weight: 700;
+    color: rgba(11, 45, 94, 0.5);
+}
+
+.giftcard-custom__input input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--color-navy);
+    font-family: inherit;
+    outline: none;
+    padding: 0;
+    width: 100%;
+}
+
+.giftcard-custom__input input::placeholder {
+    color: rgba(11, 45, 94, 0.3);
+    font-weight: 500;
+}
+
+.giftcard-helper {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.75rem;
+    color: rgba(11, 45, 94, 0.5);
+}
+
+.giftcard-helper--right {
+    text-align: right;
+}
+
+.giftcard-error {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.78rem;
+    color: #d83a52;
+    font-weight: 600;
+}
+
+/* ── Field ───────────────────────────────────────────────── */
+.giftcard-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-4);
+}
+
+.giftcard-field label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: rgba(11, 45, 94, 0.65);
+    margin-bottom: 6px;
+    letter-spacing: 0.02em;
+}
+
+.giftcard-field input,
+.giftcard-field textarea {
+    width: 100%;
+    padding: 14px 16px;
+    background: #ffffff;
+    border: 1.5px solid rgba(11, 45, 94, 0.1);
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: var(--color-navy);
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.giftcard-field input::placeholder,
+.giftcard-field textarea::placeholder {
+    color: rgba(11, 45, 94, 0.3);
+}
+
+.giftcard-field input:focus,
+.giftcard-field textarea:focus {
+    border-color: rgba(0, 165, 255, 0.5);
+    box-shadow: 0 0 0 4px rgba(0, 165, 255, 0.1);
+}
+
+.giftcard-field textarea {
+    resize: vertical;
+    min-height: 90px;
+    line-height: 1.5;
+}
+
+.giftcard-field--date input {
+    font-weight: 600;
+    max-width: 240px;
+    color-scheme: light;
+}
+
+/* ── Delivery options ──────────────────────────────────── */
+.giftcard-delivery {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.giftcard-delivery__opt {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px;
+    background: #ffffff;
+    border: 1.5px solid rgba(11, 45, 94, 0.1);
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+    text-align: left;
+    color: var(--color-navy);
+}
+
+.giftcard-delivery__opt:hover {
+    border-color: rgba(0, 165, 255, 0.35);
+}
+
+.giftcard-delivery__opt.is-active {
+    border-color: var(--color-navy);
+    background: linear-gradient(135deg, rgba(0, 165, 255, 0.06) 0%, rgba(11, 45, 94, 0.04) 100%);
+    box-shadow: 0 8px 20px -10px rgba(11, 45, 94, 0.25);
+}
+
+.giftcard-delivery__opt svg {
+    color: #00A5FF;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.giftcard-delivery__opt strong {
+    display: block;
+    font-size: 0.92rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.giftcard-delivery__opt small {
+    display: block;
+    font-size: 0.78rem;
+    color: rgba(11, 45, 94, 0.55);
+    line-height: 1.4;
+}
+
+/* ── CTA ─────────────────────────────────────────────────── */
+.giftcard-cta {
+    margin-top: var(--sp-6);
+    padding: 26px;
+    background: #ffffff;
+    border-radius: 20px;
+    border: 1px solid rgba(11, 45, 94, 0.06);
+    box-shadow: 0 16px 40px -20px rgba(11, 45, 94, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-4);
+}
+
+.giftcard-cta__summary {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding-bottom: var(--sp-3);
+    border-bottom: 1px solid rgba(11, 45, 94, 0.08);
+}
+
+.giftcard-cta__summary span {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(11, 45, 94, 0.55);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+}
+
+.giftcard-cta__summary strong {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--color-navy);
+    letter-spacing: -0.02em;
+}
+
+.giftcard-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px 28px;
+    border-radius: 100px;
+    border: none;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.giftcard-btn--primary {
+    background: var(--color-navy);
+    color: #ffffff;
+    box-shadow: 0 8px 22px -10px rgba(11, 45, 94, 0.4);
+}
+
+.giftcard-btn--primary:hover {
+    background: linear-gradient(120deg, #1565C0 0%, #00A5FF 100%);
+    box-shadow: 0 14px 32px -12px rgba(0, 165, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+.giftcard-btn--full {
+    width: 100%;
+}
+
+.giftcard-fineprint {
+    font-size: 0.78rem;
+    color: rgba(11, 45, 94, 0.5);
+    line-height: 1.55;
+    margin: 0;
+}
+
+/* ── Success state ───────────────────────────────────────── */
+.giftcard-page--success {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.giftcard-success {
+    max-width: 600px;
+    text-align: center;
+    padding: var(--sp-10) var(--sp-6);
+}
+
+.giftcard-success__icon {
+    display: inline-flex;
+    width: 92px;
+    height: 92px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(0, 165, 255, 0.12), rgba(21, 101, 192, 0.06));
+    color: #00A5FF;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--sp-6);
+}
+
+.giftcard-success h1 {
+    font-size: clamp(2rem, 4vw, 2.6rem);
+    font-weight: 700;
+    color: var(--color-navy);
+    line-height: 1.15;
+    margin: 0 0 var(--sp-4) 0;
+}
+
+.giftcard-success p {
+    font-size: 1rem;
+    color: rgba(11, 45, 94, 0.65);
+    line-height: 1.65;
+    margin: 0 0 var(--sp-8) 0;
+}
+
+.giftcard-success__cta {
+    display: flex;
+    justify-content: center;
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 920px) {
+    .giftcard-layout {
+        grid-template-columns: 1fr;
+        gap: var(--sp-8);
+    }
+    .giftcard-preview-wrap {
+        position: relative;
+        top: auto;
+        max-width: 460px;
+        margin: 0 auto;
+        width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .giftcard-grid-2 {
+        grid-template-columns: 1fr;
+    }
+    .giftcard-presets {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .giftcard-delivery {
+        grid-template-columns: 1fr;
+    }
+}

@@ -4,6 +4,7 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 import HeroSection from '../components/home/HeroSection';
 import SignatureSection from '../components/home/SignatureSection';
 import ProductsCarousel from '../components/home/ProductsCarousel';
+import GiftCardPromo from '../components/home/GiftCardPromo';
 import TrustIconsBar from '../components/home/TrustIconsBar';
 import BenefitsSection from '../components/home/BenefitsSection';
 import BrandStory from '../components/home/BrandStory';
@@ -44,6 +45,7 @@ export default function HomePage() {
       <HeroSection />
       <SignatureSection />
       <ProductsCarousel />
+      <GiftCardPromo />
       <TrustIconsBar />
       <BenefitsSection />
       <BrandStory />

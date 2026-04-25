@@ -20,6 +20,7 @@ import TermsPage from './pages/TermsPage';
 import PrivacyPage from './pages/PrivacyPage';
 import ReturnsPage from './pages/ReturnsPage';
 import CartPage from './pages/CartPage';
+import GiftCardPage from './pages/GiftCardPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 export default function App() {
@@ -57,6 +58,7 @@ export default function App() {
             <Route path="/shop" element={<ShopPage />} />
             <Route path="/products/:handle" element={<ProductPage />} />
             <Route path="/cart" element={<CartPage />} />
+            <Route path="/gift-card" element={<GiftCardPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/science" element={<SciencePage />} />
             <Route path="/faq" element={<FAQPage />} />
