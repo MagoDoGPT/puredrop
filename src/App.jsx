@@ -5,6 +5,7 @@ import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import DiscountPopup from './components/layout/DiscountPopup';
 import ConsentBanner from './components/layout/ConsentBanner';
+import ScrollToTop from './components/layout/ScrollToTop';
 import HomePage from './pages/HomePage';
 import ShopPage from './pages/ShopPage';
 import ProductPage from './pages/ProductPage';
@@ -50,6 +51,7 @@ export default function App() {
   return (
     <CartProvider>
       <Router basename={routerBase}>
+        <ScrollToTop />
         <div className="app-container">
           <Header />
 
