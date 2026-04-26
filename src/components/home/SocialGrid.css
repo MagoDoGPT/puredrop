@@ -26,7 +26,20 @@
     width: 200%;
     height: 100%;
     display: block;
-    animation: wave-horizontal-flow 20s linear infinite reverse;
+}
+
+.social-wave-path {
+    animation: wave-horizontal-flow linear infinite;
+    will-change: transform;
+}
+
+.social-wave-front {
+    animation-duration: 12s;
+}
+
+.social-wave-back {
+    animation-duration: 18s;
+    animation-direction: reverse;
 }
 
 /* ── Header Area ────────────────────────────────────────── */

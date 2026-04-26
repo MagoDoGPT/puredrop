@@ -10,9 +10,9 @@ export default function SocialGrid() {
       <div className="social-top-transition">
         <svg viewBox="0 0 2880 120" preserveAspectRatio="none" className="social-wave-svg">
           {/* Back Wave (translucent light blue) */}
-          <path d="M0,60 C360,120 360,0 720,60 C1080,120 1080,0 1440,60 C1800,120 1800,0 2160,60 C2520,120 2520,0 2880,60 L2880,120 L0,120 Z" fill="rgba(240, 247, 255, 0.5)" />
+          <path className="social-wave-path social-wave-back" d="M0,60 C360,120 360,0 720,60 C1080,120 1080,0 1440,60 C1800,120 1800,0 2160,60 C2520,120 2520,0 2880,60 L2880,120 L0,120 Z" fill="rgba(240, 247, 255, 0.5)" />
           {/* Front Wave (solid light blue, matches Testimonials bg) */}
-          <path d="M0,80 C360,20 360,120 720,80 C1080,20 1080,120 1440,80 C1800,20 1800,120 2160,80 C2520,20 2520,120 2880,80 L2880,120 L0,120 Z" fill="#f0f7ff" />
+          <path className="social-wave-path social-wave-front" d="M0,80 C360,20 360,120 720,80 C1080,20 1080,120 1440,80 C1800,20 1800,120 2160,80 C2520,20 2520,120 2880,80 L2880,120 L0,120 Z" fill="#f0f7ff" />
         </svg>
       </div>
 
